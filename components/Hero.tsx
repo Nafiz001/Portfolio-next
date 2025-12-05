@@ -63,50 +63,81 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          {/* Professional Photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-8"
+          >
+            <img 
+              src="/images/profile/nafiz.jpg" 
+              alt="Nafiz Ahmed - Frontend Developer"
+              className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover mx-auto ring-8 ring-pink-500/30 shadow-2xl"
+            />
+          </motion.div>
+
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-wider mb-6"
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-wider mb-4"
           >
-            Hey, I'm <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">Nafiz Ahmed</span>
+            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">Nafiz Ahmed</span>
           </motion.h1>
+          
+          {/* Professional Designation */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-2xl md:text-3xl font-bold text-pink-500 mb-6"
+          >
+            Frontend Developer | React Specialist
+          </motion.p>
+
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed"
           >
-            A passionate <span className="font-bold text-pink-500">React Developer</span> building responsive and user-friendly web applications with modern technologies. Specialized in React, Next.js, and creating seamless user experiences.
+            A passionate React Developer building responsive and user-friendly web applications with modern technologies. Specialized in React, Next.js, and creating seamless user experiences.
           </motion.p>
+
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link 
-              href="#projects"
-              className="group bg-gradient-to-r from-pink-500 to-blue-500 text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105"
+            <a 
+              href="/resume.pdf"
+              download
+              className="group bg-gradient-to-r from-pink-500 to-blue-500 text-white text-lg font-bold py-4 px-10 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105"
             >
               <span className="flex items-center gap-2">
-                VIEW PROJECTS
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
+                DOWNLOAD RESUME
               </span>
+            </a>
+            <Link 
+              href="#projects"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-lg font-bold py-4 px-10 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-gray-200 dark:border-gray-700"
+            >
+              VIEW PROJECTS
             </Link>
             <Link 
               href="#contact"
-              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-lg font-bold py-4 px-12 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-gray-200 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-lg font-bold py-4 px-10 rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 border-2 border-gray-200 dark:border-gray-700"
             >
               GET IN TOUCH
             </Link>
           </motion.div>
         </div>
-        
-        
       </div>
     </section>
   );
