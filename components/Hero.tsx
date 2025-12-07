@@ -94,7 +94,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-2xl md:text-3xl font-bold text-pink-500 mb-6"
           >
-            Frontend Developer | React Specialist
+            Full Stack Developer | React Specialist
           </motion.p>
 
           <motion.p 
