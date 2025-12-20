@@ -84,7 +84,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-wider mb-4"
           >
-            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">Nafiz Ahmed</span>
+            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">Md. Nafiz Ahmed</span>
           </motion.h1>
           
           {/* Professional Designation */}
@@ -94,7 +94,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-2xl md:text-3xl font-bold text-pink-500 mb-6"
           >
-            Full Stack Developer | React Specialist
+            Full Stack Developer | React & Next Specialist
           </motion.p>
 
           <motion.p 

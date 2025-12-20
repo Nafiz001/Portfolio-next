@@ -2,9 +2,31 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function Projects() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 3;
+
   const projects = [
+    {
+      title: "BookNest",
+      subtitle: "Book Management & E-commerce Platform",
+      description: "A comprehensive book management and e-commerce platform connecting readers, librarians, and administrators with seamless digital experience. Features Stripe payment integration, role-based dashboards, and interactive maps.",
+      image: "/images/projects/booknest.png",
+      liveUrl: "https://booknest-client-jet.vercel.app/",
+      githubClient: "https://github.com/Nafiz001/booknest-client",
+      githubServer: "https://github.com/Nafiz001/booknest-server",
+      tags: ["React", "Stripe", "MongoDB", "Leaflet", "Firebase Auth"],
+      features: [
+        "Secure authentication with Google OAuth and email/password",
+        "Stripe payment gateway for e-commerce transactions",
+        "Role-based dashboards (User, Librarian, Admin)",
+        "Interactive maps with Leaflet showing service coverage areas",
+        "Review and rating system with real-time engagement",
+        "Dark/light theme support with smooth transitions"
+      ]
+    },
     {
       title: "Artisan's Echo",
       subtitle: "Art Marketplace Platform",
@@ -69,6 +91,18 @@ export default function Projects() {
     }
   ];
 
+  // Pagination logic
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Scroll to projects section
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="projects" className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -121,7 +155,7 @@ export default function Projects() {
         </div>
 
         <div className="space-y-20 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <motion.div 
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -200,6 +234,53 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center items-center gap-4 mt-16"
+          >
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-12 h-12 rounded-lg font-bold transition-all transform hover:scale-110 ${
+                    currentPage === page
+                      ? 'bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-lg'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold rounded-lg shadow-lg hover:shadow-2xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
