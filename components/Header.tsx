@@ -2,59 +2,97 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      // Determine if background should be glass (scrolled)
+      setIsScrolled(currentScrollY > 50);
+
+      // Determine scroll direction for visibility
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide navbar
+        setIsVisible(false);
+      } else {
+        // Scrolling up - show navbar
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
+
+  const navLinks = [
+    { name: 'HOME', href: '#home' },
+    { name: 'ABOUT', href: '#about' },
+    { name: 'EDUCATION', href: '#education' },
+    { name: 'PROJECTS', href: '#projects' },
+    { name: 'CONTACT', href: '#contact' },
+  ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-    }`}>
-      <div className="container mx-auto px-6 py-4">
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{
+        y: isVisible ? 0 : -100,
+        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0)',
+        paddingTop: isScrolled ? '12px' : '24px',
+        paddingBottom: isScrolled ? '12px' : '24px',
+      }}
+      transition={{
+        y: { duration: isVisible ? 0.5 : 0, ease: isVisible ? "easeOut" : "linear" },
+        backgroundColor: { duration: 0.4 },
+        paddingTop: { duration: 0.4 },
+        paddingBottom: { duration: 0.4 }
+      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}
+    >
+      <div className="container mx-auto px-6">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-3 group">
-            <img 
-              src="/images/profile/nafiz.jpg" 
-              alt="Nafiz Ahmed"
-              className="h-10 w-10 rounded-full object-cover ring-2 ring-pink-500/50 group-hover:scale-110 transition-transform"
-            />
-            <span className="font-bold text-lg text-gray-900 dark:text-white tracking-wide">
-              NAFIZ AHMED
+            <div className="relative">
+              <img
+                src="/images/profile/nafiz.jpg"
+                alt="Nafiz Ahmed"
+                className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover ring-2 ring-pink-500/50 group-hover:ring-pink-500 transition-all"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-pink-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <span className="font-black text-lg md:text-xl text-white tracking-[0.2em] uppercase hidden sm:block">
+              MD. NAFIZ AHMED
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#home" className="text-gray-900 dark:text-white font-semibold hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
-              HOME
-            </Link>
-            <Link href="#about" className="text-gray-900 dark:text-white font-semibold hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
-              ABOUT
-            </Link>
-            <Link href="#education" className="text-gray-900 dark:text-white font-semibold hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
-              EDUCATION
-            </Link>
-            <Link href="#projects" className="text-gray-900 dark:text-white font-semibold hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
-              PROJECTS
-            </Link>
-            <Link href="#contact" className="text-gray-900 dark:text-white font-semibold hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
-              CONTACT
-            </Link>
+          <nav className="hidden md:flex items-center space-x-10">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="relative text-white font-bold text-sm tracking-widest hover:text-pink-400 transition-all group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
           </nav>
 
-          <button 
-            className="md:hidden text-gray-900 dark:text-white"
+          <button
+            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -64,26 +102,31 @@ export default function Header() {
           </button>
         </div>
 
-        {isMobileMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 space-y-3">
-            <Link href="#home" className="block text-gray-900 dark:text-white font-semibold hover:text-pink-500 transition-colors">
-              HOME
-            </Link>
-            <Link href="#about" className="block text-gray-900 dark:text-white font-semibold hover:text-pink-500 transition-colors">
-              ABOUT
-            </Link>
-            <Link href="#education" className="block text-gray-900 dark:text-white font-semibold hover:text-pink-500 transition-colors">
-              EDUCATION
-            </Link>
-            <Link href="#projects" className="block text-gray-900 dark:text-white font-semibold hover:text-pink-500 transition-colors">
-              PROJECTS
-            </Link>
-            <Link href="#contact" className="block text-gray-900 dark:text-white font-semibold hover:text-pink-500 transition-colors">
-              CONTACT
-            </Link>
-          </nav>
-        )}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden mt-4 pb-10 space-y-6 pt-10 border-t border-white/10 glass-card rounded-3xl"
+            >
+              <div className="flex flex-col items-center space-y-8">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-white font-black text-2xl tracking-[0.3em] hover:text-pink-500 transition-all uppercase"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
-    </header>
+    </motion.header>
   );
 }
