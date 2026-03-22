@@ -2,62 +2,36 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { db } from '@/lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [projects, setProjects] = useState<any[]>([
+    {
+      title: "LOADING SYSTEM...",
+      subtitle: "Fetching...",
+      description: "Querying Firestore remote database...",
+      image: "",
+      liveUrl: "#",
+      githubClient: "#",
+      githubServer: "#",
+      tags: ["LOADING"],
+    }
+  ]);
   const projectsPerPage = 2;
 
-  const projects = [
-    {
-      title: "BookNest",
-      subtitle: "Book Management Platform",
-      description: "A comprehensive book management and e-commerce platform connecting readers, librarians, and administrators with seamless digital experience. Features Stripe payment integration, role-based dashboards, and interactive maps.",
-      image: "/images/projects/booknest.png",
-      liveUrl: "https://booknest-client-jet.vercel.app/",
-      githubClient: "https://github.com/Nafiz001/booknest-client",
-      githubServer: "https://github.com/Nafiz001/booknest-server",
-      tags: ["React", "Stripe", "MongoDB", "Leaflet", "Firebase Auth"],
-    },
-    {
-      title: "Artisan's Echo",
-      subtitle: "Art Marketplace Platform",
-      description: "A modern, responsive art marketplace platform built with React where artists showcase their work and users discover art. Features Firebase authentication, real-time MongoDB operations, advanced search and filtering, and dark/light theme toggle.",
-      image: "/images/projects/artify.png",
-      liveUrl: "https://artify-client-side.web.app/",
-      githubClient: "https://github.com/Nafiz001/artify-client-side",
-      githubServer: "https://github.com/Nafiz001/artify-server-side",
-      tags: ["React", "Firebase", "MongoDB", "Tailwind CSS"],
-    },
-    {
-      title: "ChefKit",
-      subtitle: "Meal Kits Platform",
-      description: "Full-stack Next.js 16 application featuring a meal kit marketplace with authentication and content management. Built with App Router, NextAuth.js, and MongoDB for seamless performance and security.",
-      image: "/images/projects/chefkit.png",
-      liveUrl: "https://chefkit-client-side.vercel.app/",
-      githubClient: "https://github.com/Nafiz001/chefkit-client-side",
-      githubServer: "https://github.com/Nafiz001/chefkit-server-side",
-      tags: ["Next.js 16", "NextAuth.js", "MongoDB"],
-    },
-    {
-      title: "GameHub",
-      subtitle: "Gaming Platform",
-      description: "A modern, responsive gaming platform enabling users to browse, discover, and explore video games. Features user authentication, search functionality, and smooth animations.",
-      image: "/images/projects/gamehub.png",
-      liveUrl: "https://my-gamehub-165d0.web.app/",
-      githubClient: "https://github.com/Nafiz001/MY-GAMEHUB",
-      tags: ["React", "Firebase", "CSS3"],
-    },
-    {
-      title: "Dragon News",
-      subtitle: "News Portal Application",
-      description: "Responsive news portal featuring real-time authentication and dynamic content delivery. Built with React and Firebase for fast performance and reliable user management.",
-      image: "/images/projects/dragon.png",
-      liveUrl: "https://dragon-news-bd-be17c.web.app/",
-      githubClient: "https://github.com/Nafiz001/Dragon-News",
-      tags: ["React", "Firebase", "JavaScript"],
-    }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const snap = await getDocs(collection(db, 'projects'));
+        const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        if (data.length > 0) setProjects(data);
+      } catch (err) { console.error('Error fetching projects from Firebase', err); }
+    };
+    fetchData();
+  }, []);
 
   const totalPages = Math.ceil(projects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
@@ -99,7 +73,7 @@ export default function Projects() {
             >
               <div className="absolute inset-0 bg-[#00f0ff]/20 z-10 opacity-0 group-hover:opacity-50 transition-opacity mix-blend-overlay"></div>
               <motion.img
-                src={project.image}
+                src={project.image || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
                 alt={project.title}
                 className="w-full h-full object-cover transition-all"
                 initial={{ filter: 'grayscale(100%)', opacity: 0.7 }}
@@ -125,7 +99,7 @@ export default function Projects() {
 
               <div>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, idx) => (
+                  {project.tags?.map((tag: string, idx: number) => (
                     <span key={idx} className="bg-[#00f0ff]/10 text-[#00f0ff] px-2 py-1 text-xs font-mono border border-[#00f0ff]/20">
                       {tag}
                     </span>
@@ -133,20 +107,24 @@ export default function Projects() {
                 </div>
 
                 <div className="flex gap-4 border-t border-[#00f0ff]/20 pt-4">
-                  <Link
-                    href={project.liveUrl}
-                    target="_blank"
-                    className="text-[#00f0ff] hover:text-white font-mono text-sm tracking-widest uppercase hover:underline"
-                  >
-                    [ LIVE DEMO ]
-                  </Link>
-                  <Link
-                    href={project.githubClient}
-                    target="_blank"
-                    className="text-gray-400 hover:text-white font-mono text-sm tracking-widest uppercase hover:underline"
-                  >
-                    [ GITHUB ]
-                  </Link>
+                  {project.liveUrl && (
+                    <Link
+                      href={project.liveUrl || '#'}
+                      target="_blank"
+                      className="text-[#00f0ff] hover:text-white font-mono text-sm tracking-widest uppercase hover:underline"
+                    >
+                      [ LIVE DEMO ]
+                    </Link>
+                  )}
+                  {project.githubClient && (
+                    <Link
+                      href={project.githubClient || '#'}
+                      target="_blank"
+                      className="text-gray-400 hover:text-white font-mono text-sm tracking-widest uppercase hover:underline"
+                    >
+                      [ GITHUB ]
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

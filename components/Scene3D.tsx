@@ -133,25 +133,16 @@ const DataCore = () => {
   );
 };
 
-// Colorful Wires connecting servers to the Data Core
+// Colorful Wires connecting 6 hexagonal servers to the Data Core
 const DataCables = () => {
   return (
     <group>
-      {/* West Server Cables */}
-      <QuadraticBezierLine start={[-12, 0, 0]} end={[0, 4, 0]} mid={[-6, 0.5, 2]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[-12, 0, 1]} end={[0, 4, 0]} mid={[-6, 1.5, -1]} color="#00ffaa" lineWidth={1.5} dashed={true} dashScale={50} />
-
-      {/* East Server Cables */}
-      <QuadraticBezierLine start={[12, 0, 0]} end={[0, 4, 0]} mid={[6, 0.5, -2]} color="#ff0055" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[12, 0, -1]} end={[0, 4, 0]} mid={[6, 1.5, 1]} color="#ffcc00" lineWidth={1.5} dashed={true} dashScale={50} />
-
-      {/* North Server Cables */}
-      <QuadraticBezierLine start={[0, 0, -12]} end={[0, 4, 0]} mid={[-2, 0.5, -6]} color="#00ffaa" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[1, 0, -12]} end={[0, 4, 0]} mid={[1, 1.5, -6]} color="#00f0ff" lineWidth={1.5} dashed={true} dashScale={50} />
-
-      {/* South Server Cables */}
-      <QuadraticBezierLine start={[0, 0, 12]} end={[0, 4, 0]} mid={[2, 0.5, 6]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[-1, 0, 12]} end={[0, 4, 0]} mid={[-1, 1.5, 6]} color="#ff0055" lineWidth={1.5} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[0, 0, 12]} end={[0, 4, 0]} mid={[0, 1, 6]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[10.392, 0, 6]} end={[0, 4, 0]} mid={[5, 1, 3]} color="#00ffaa" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[10.392, 0, -6]} end={[0, 4, 0]} mid={[5, 1, -3]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[0, 0, -12]} end={[0, 4, 0]} mid={[0, 1, -6]} color="#ff0055" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[-10.392, 0, -6]} end={[0, 4, 0]} mid={[-5, 1, -3]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[-10.392, 0, 6]} end={[0, 4, 0]} mid={[-5, 1, 3]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
     </group>
   );
 };
@@ -173,8 +164,8 @@ const CarouselSnapper = ({ currentView, controlsRef }: { currentView: string, co
       timeoutId = setTimeout(() => {
         const obj = controls.object;
         const angle = Math.atan2(obj.position.x, obj.position.z);
-        // Snap to nearest 90 degrees (Math.PI / 2)
-        const snapped = Math.round(angle / (Math.PI / 2)) * (Math.PI / 2);
+        // Snap to nearest 60 degrees (Math.PI / 3)
+        const snapped = Math.round(angle / (Math.PI / 3)) * (Math.PI / 3);
 
         const radius = Math.sqrt(obj.position.x ** 2 + obj.position.z ** 2);
 
@@ -221,16 +212,17 @@ const CameraController = ({ currentView, controlsRef, isMobile }: { currentView:
   useEffect(() => {
     if (!controlsRef.current) return;
 
-    // Decreased radius to 12
     const targets: Record<string, { pos: [number, number, number], look: [number, number, number] }> = {
       'home': {
         pos: isMobile ? [0, 8, 26] : [0, 8, 22],
         look: isMobile ? [0, 8, 0] : [0, 4, 0]
       },
-      'projects': { pos: [-20, 6, 0], look: [-12, 6, 0] },     // Outside West
-      'about': { pos: [20, 6, 0], look: [12, 6, 0] },          // Outside East
-      'contact': { pos: [0, 6, -20], look: [0, 6, -12] },      // Outside North
-      'education': { pos: [0, 6, 20], look: [0, 6, 12] },      // Outside South
+      'education': { pos: [0, 6, 20], look: [0, 6, 12] },
+      'about': { pos: [17.32, 6, 10], look: [10.392, 6, 6] },
+      'experience': { pos: [17.32, 6, -10], look: [10.392, 6, -6] },
+      'contact': { pos: [0, 6, -20], look: [0, 6, -12] },
+      'achievements': { pos: [-17.32, 6, -10], look: [-10.392, 6, -6] },
+      'projects': { pos: [-17.32, 6, 10], look: [-10.392, 6, 6] },
     };
 
     const target = targets[currentView] || targets['home'];
@@ -304,47 +296,23 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
           <DataCore />
           <DataCables />
 
-          {/* Servers tightly orbited at nominal radius 12 */}
-          <ServerRack position={[-12, 0, 0]} rotation={[0, -Math.PI / 2, 0]} /> {/* West */}
-          <ServerRack position={[12, 0, 0]} rotation={[0, Math.PI / 2, 0]} />   {/* East */}
-          <ServerRack position={[0, 0, -12]} rotation={[0, Math.PI, 0]} />      {/* North */}
-          <ServerRack position={[0, 0, 12]} rotation={[0, 0, 0]} />             {/* South */}
+          {/* Hexagonal Servers tightly orbited at nominal radius 12 */}
+          <ServerRack position={[0, 0, 12]} rotation={[0, 0, 0]} />
+          <ServerRack position={[10.392, 0, 6]} rotation={[0, Math.PI / 3, 0]} />
+          <ServerRack position={[10.392, 0, -6]} rotation={[0, 2 * Math.PI / 3, 0]} />
+          <ServerRack position={[0, 0, -12]} rotation={[0, Math.PI, 0]} />
+          <ServerRack position={[-10.392, 0, -6]} rotation={[0, -2 * Math.PI / 3, 0]} />
+          <ServerRack position={[-10.392, 0, 6]} rotation={[0, -Math.PI / 3, 0]} />
 
           {/* Nodes face OUTWARDS */}
           {isHome && (
             <>
-              <NavNode
-                position={[-12, 6, 0]}
-                rotation={[0, -Math.PI / 2, 0]}
-                label="PROJECTS"
-                viewId="projects"
-                color="#00f0ff"
-                onClick={setCurrentView}
-              />
-              <NavNode
-                position={[12, 6, 0]}
-                rotation={[0, Math.PI / 2, 0]}
-                label="ABOUT"
-                viewId="about"
-                color="#00ffaa"
-                onClick={setCurrentView}
-              />
-              <NavNode
-                position={[0, 6, -12]}
-                rotation={[0, Math.PI, 0]}
-                label="CONTACT"
-                viewId="contact"
-                color="#ff0055"
-                onClick={setCurrentView}
-              />
-              <NavNode
-                position={[0, 6, 12]}
-                rotation={[0, 0, 0]}
-                label="EDUCATION"
-                viewId="education"
-                color="#ffcc00"
-                onClick={setCurrentView}
-              />
+              <NavNode position={[0, 6, 12]} rotation={[0, 0, 0]} label="EDUCATION" viewId="education" color="#ffcc00" onClick={setCurrentView} />
+              <NavNode position={[10.392, 6, 6]} rotation={[0, Math.PI / 3, 0]} label="ABOUT" viewId="about" color="#00ffaa" onClick={setCurrentView} />
+              <NavNode position={[10.392, 6, -6]} rotation={[0, 2 * Math.PI / 3, 0]} label="EXPERIENCE" viewId="experience" color="#00f0ff" onClick={setCurrentView} />
+              <NavNode position={[0, 6, -12]} rotation={[0, Math.PI, 0]} label="CONTACT" viewId="contact" color="#ff0055" onClick={setCurrentView} />
+              <NavNode position={[-10.392, 6, -6]} rotation={[0, -2 * Math.PI / 3, 0]} label="ACHIEVEMENT" viewId="achievements" color="#ffcc00" onClick={setCurrentView} />
+              <NavNode position={[-10.392, 6, 6]} rotation={[0, -Math.PI / 3, 0]} label="PROJECTS" viewId="projects" color="#00f0ff" onClick={setCurrentView} />
             </>
           )}
 

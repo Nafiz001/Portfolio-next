@@ -3,35 +3,52 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import { useState, useEffect } from 'react';
+import { db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+
 export default function About() {
-  const skillIcons = [
-    { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg' },
-    { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg' },
-    { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
-    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
-    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
-    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
-    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', invert: true },
-    { name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg', invert: true },
-    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
-    { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg' },
-    { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg' },
-    { name: 'ASP.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg' },
-    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
-    { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', invert: true },
-    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
-    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg' },
-    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg' },
-    { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg' },
-    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg' },
-    { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
-    { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg' },
-    { name: 'Grafana', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg' },
-    { name: 'Prometheus', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg' },
-    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
-    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', invert: true },
-    { name: 'Postman', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg' },
-  ];
+  const [skills, setSkills] = useState<string[]>([
+    'html5', 'css3', 'javascript', 'react', 'nodejs'
+  ]);
+
+  const getIconForSkill = (skillStr: string) => {
+    const mapping: Record<string, any> = {
+      'c': { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg' },
+      'c++': { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg' },
+      'cplusplus': { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg' },
+      'nextjs': { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', invert: true },
+      'threejs': { name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg', invert: true },
+      'dotnet': { name: 'ASP.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg' },
+      'kubernetes': { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg' },
+      'firebase': { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg' },
+      'express': { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', invert: true },
+      'github': { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', invert: true },
+      'tailwindcss': { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
+    };
+
+    const clean = skillStr.toLowerCase().trim();
+    if (mapping[clean]) return mapping[clean];
+
+    return { 
+      name: skillStr.toUpperCase(), 
+      icon: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${clean}/${clean}-original.svg` 
+    };
+  };
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const snap = await getDoc(doc(db, 'about', 'skills'));
+        if (snap.exists() && snap.data().list) {
+          setSkills(snap.data().list);
+        }
+      } catch (e) {
+        console.error("Error fetching skills:", e);
+      }
+    };
+    fetchSkills();
+  }, []);
 
   return (
     <div className="glass-card w-full p-6 md:p-10 relative bg-black/40 border-[#00f0ff]/30 shadow-[#00f0ff]/10">
@@ -88,23 +105,26 @@ export default function About() {
             {'>'} LOADED PACKAGES_
           </h3>
           <div className="flex flex-wrap gap-4 md:gap-7 justify-center md:justify-start">
-            {skillIcons.map((skill, index) => (
-              <div key={index} className="relative group w-10 h-10 md:w-12 md:h-12 flex items-center justify-center cursor-pointer transition-transform hover:scale-110">
-                {/* True Color Icon immediately visible */}
-                <img
-                  src={skill.icon}
-                  alt={skill.name}
-                  className={`w-full h-full object-contain transition-all duration-300 opacity-70 group-hover:opacity-100 drop-shadow-none group-hover:drop-shadow-[0_0_12px_rgba(0,240,255,0.8)] ${skill.invert ? 'invert' : ''}`}
-                />
-
-                {/* Tooltip */}
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-1 text-xs px-3 py-1.5 bg-black/90 border border-[#00f0ff]/50 rounded text-[#00f0ff] whitespace-nowrap pointer-events-none z-10 font-mono shadow-[0_0_10px_rgba(0,240,255,0.2)] backdrop-blur-md">
-                  {skill.name}
-                  {/* Small pointer triangle */}
-                  <div className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 border-l-[5px] border-r-[5px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#00f0ff]/50"></div>
+            {skills.map((skillStr, index) => {
+              const skill = getIconForSkill(skillStr);
+              return (
+                <div key={index} className="relative group w-10 h-10 md:w-12 md:h-12 flex items-center justify-center cursor-pointer transition-transform hover:scale-110">
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className={`w-full h-full object-contain transition-all duration-300 opacity-70 group-hover:opacity-100 drop-shadow-none group-hover:drop-shadow-[0_0_12px_rgba(0,240,255,0.8)] ${skill.invert ? 'invert' : ''}`}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                  {/* Tooltip */}
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-1 text-xs px-3 py-1.5 bg-black/90 border border-[#00f0ff]/50 rounded text-[#00f0ff] whitespace-nowrap pointer-events-none z-10 font-mono shadow-[0_0_10px_rgba(0,240,255,0.2)] backdrop-blur-md">
+                    {skill.name}
+                    <div className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 border-l-[5px] border-r-[5px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#00f0ff]/50"></div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </motion.div>
       </div>

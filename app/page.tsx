@@ -7,10 +7,12 @@ import About from '@/components/About';
 import Education from '@/components/Education';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
+import Experience from '@/components/Experience';
+import Achievements from '@/components/Achievements';
 import SocialSidebar from '@/components/SocialSidebar';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export type ViewState = 'home' | 'about' | 'education' | 'projects' | 'contact';
+export type ViewState = 'home' | 'about' | 'education' | 'projects' | 'contact' | 'experience' | 'achievements';
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
@@ -69,6 +71,16 @@ export default function Home() {
           {currentView === 'education' && (
             <motion.div key="education" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.5 }} className="w-full h-full p-4 pt-24 pb-24 md:p-8 md:pt-24 md:pb-8 max-w-7xl mx-auto overflow-y-scroll custom-scrollbar pointer-events-auto">
               <Education />
+            </motion.div>
+          )}
+          {currentView === 'experience' && (
+            <motion.div key="experience" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.5 }} className="w-full h-full p-4 pt-24 pb-24 md:p-8 md:pt-24 md:pb-8 max-w-7xl mx-auto overflow-y-scroll custom-scrollbar pointer-events-auto">
+              <Experience />
+            </motion.div>
+          )}
+          {currentView === 'achievements' && (
+            <motion.div key="achievements" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.5 }} className="w-full h-full p-4 pt-24 pb-24 md:p-8 md:pt-24 md:pb-8 max-w-7xl mx-auto overflow-y-scroll custom-scrollbar pointer-events-auto">
+              <Achievements />
             </motion.div>
           )}
         </AnimatePresence>
