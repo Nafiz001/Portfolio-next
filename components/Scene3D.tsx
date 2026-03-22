@@ -15,7 +15,7 @@ const ServerRack = ({ position, rotation }: { position: [number, number, number]
         <boxGeometry args={[2, 4, 3]} />
         <meshStandardMaterial color="#0a192f" emissive="#00f0ff" emissiveIntensity={0.05} roughness={0.7} metalness={0.5} />
       </mesh>
-      
+
       {/* Glowing drive lights (Front Only) */}
       <Instances limit={20} range={20}>
         <boxGeometry args={[0.8, 0.1, 0.05]} />
@@ -314,7 +314,7 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
               <NavNode
                 position={[-12, 6, 0]}
                 rotation={[0, -Math.PI / 2, 0]}
-                label="SYS.PROJECTS"
+                label="PROJECTS"
                 viewId="projects"
                 color="#00f0ff"
                 onClick={setCurrentView}
@@ -322,7 +322,7 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
               <NavNode
                 position={[12, 6, 0]}
                 rotation={[0, Math.PI / 2, 0]}
-                label="SYS.ABOUT"
+                label="ABOUT"
                 viewId="about"
                 color="#00ffaa"
                 onClick={setCurrentView}
@@ -330,7 +330,7 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
               <NavNode
                 position={[0, 6, -12]}
                 rotation={[0, Math.PI, 0]}
-                label="SYS.CONTACT"
+                label="CONTACT"
                 viewId="contact"
                 color="#ff0055"
                 onClick={setCurrentView}
@@ -338,7 +338,7 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
               <NavNode
                 position={[0, 6, 12]}
                 rotation={[0, 0, 0]}
-                label="SYS.EDUCATION"
+                label="EDUCATION"
                 viewId="education"
                 color="#ffcc00"
                 onClick={setCurrentView}

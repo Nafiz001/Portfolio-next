@@ -21,10 +21,10 @@ export default function Education() {
     <div className="glass-card w-full p-6 md:p-10 relative bg-black/40 border-[#00f0ff]/30 shadow-[#00f0ff]/10">
       <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00f0ff] opacity-50"></div>
       <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00f0ff] opacity-50"></div>
-      
+
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-[0.2em] text-shadow-cyan uppercase">
-          SYS.EDUCATION
+          EDUCATION
         </h2>
         <p className="text-[#00ffaa] font-mono tracking-widest text-sm md:text-base">
           {'>'} LOADING ACADEMIC RECORDS...

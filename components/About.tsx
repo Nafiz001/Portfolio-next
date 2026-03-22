@@ -38,10 +38,10 @@ export default function About() {
       {/* Decorative corner pieces */}
       <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00f0ff] opacity-50"></div>
       <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00f0ff] opacity-50"></div>
-      
+
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-[0.2em] text-shadow-cyan">
-          SYS.ABOUT_ME
+          ABOUT_ME
         </h2>
         <p className="text-[#00ffaa] font-mono tracking-widest text-sm md:text-base">
           {'>'} EXTRACTING USER DATA...
@@ -91,12 +91,12 @@ export default function About() {
             {skillIcons.map((skill, index) => (
               <div key={index} className="relative group w-10 h-10 md:w-12 md:h-12 flex items-center justify-center cursor-pointer transition-transform hover:scale-110">
                 {/* True Color Icon immediately visible */}
-                <img 
-                  src={skill.icon} 
-                  alt={skill.name} 
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
                   className={`w-full h-full object-contain transition-all duration-300 opacity-70 group-hover:opacity-100 drop-shadow-none group-hover:drop-shadow-[0_0_12px_rgba(0,240,255,0.8)] ${skill.invert ? 'invert' : ''}`}
                 />
-                
+
                 {/* Tooltip */}
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-1 text-xs px-3 py-1.5 bg-black/90 border border-[#00f0ff]/50 rounded text-[#00f0ff] whitespace-nowrap pointer-events-none z-10 font-mono shadow-[0_0_10px_rgba(0,240,255,0.2)] backdrop-blur-md">
                   {skill.name}

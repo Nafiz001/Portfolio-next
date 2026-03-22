@@ -22,10 +22,10 @@ export default function Contact() {
       {/* Decorative corner pieces */}
       <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00f0ff] opacity-50"></div>
       <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00f0ff] opacity-50"></div>
-      
+
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-[0.2em] text-shadow-cyan">
-          SYS.CONTACT
+          CONTACT
         </h2>
         <p className="text-[#00ffaa] font-mono tracking-widest text-sm md:text-base">
           {'>'} ESTABLISHING SECURE CONNECTION...
@@ -35,10 +35,10 @@ export default function Contact() {
       {/* Contact Information Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-12">
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.5, delay: 0.1 }}
-           className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
         >
           <div className="text-[#00f0ff] mb-4">
             <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,10 +52,10 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.5, delay: 0.2 }}
-           className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
         >
           <div className="text-[#00f0ff] mb-4">
             <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,10 +69,10 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.5, delay: 0.3 }}
-           className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="bg-black/60 border border-[#00f0ff]/20 p-6 text-center group hover:border-[#00f0ff] transition-all font-mono"
         >
           <div className="text-[#00f0ff] mb-4">
             <svg className="w-8 h-8 mx-auto" fill="currentColor" viewBox="0 0 24 24">
@@ -88,10 +88,10 @@ export default function Contact() {
 
       <div className="w-full">
         <motion.div
-           initial={{ opacity: 0, scale: 0.95 }}
-           animate={{ opacity: 1, scale: 1 }}
-           transition={{ duration: 0.5, delay: 0.4 }}
-           className="bg-black/60 border border-[#00f0ff]/20 p-8 w-full relative"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="bg-black/60 border border-[#00f0ff]/20 p-8 w-full relative"
         >
           <div className="absolute top-0 left-0 bg-[#00f0ff]/20 text-[#00f0ff] px-3 py-1 text-xs font-mono">MESSAGE_PAYLOAD.EXE</div>
           <form onSubmit={handleSubmit} className="space-y-6 mt-4 font-mono">
