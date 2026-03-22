@@ -76,6 +76,7 @@ const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0]
         <Text
           position={[0, 0, 0.16]}
           fontSize={0.8}
+          font="/fonts/Hacked-KerX.ttf?v=1"
           color={hovered ? '#000' : color}
           anchorX="center"
           anchorY="middle"
@@ -88,6 +89,7 @@ const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0]
           position={[0, 0, -0.16]}
           rotation={[0, Math.PI, 0]}
           fontSize={0.8}
+          font="/fonts/Hacked-KerX.ttf?v=1"
           color={hovered ? '#000' : color}
           anchorX="center"
           anchorY="middle"
