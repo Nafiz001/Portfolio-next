@@ -71,7 +71,7 @@ export default function Projects() {
       <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00f0ff] opacity-50"></div>
       
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-5xl font-black text-white mb-2 tracking-[0.2em] text-shadow-cyan">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white mb-2 tracking-widest md:tracking-[0.2em] text-shadow-cyan break-words">
           SYSTEM_DATABASE
         </h2>
         <p className="text-[#00ffaa] font-mono tracking-widest text-sm md:text-base">
@@ -88,15 +88,26 @@ export default function Projects() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="flex flex-col md:flex-row gap-6 bg-black/60 border border-[#00f0ff]/20 hover:border-[#00f0ff]/80 transition-all p-4 rounded-lg group"
           >
-            {/* Image Container */}
-            <div className="w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden border border-[#00f0ff]/30 relative rounded-sm">
+            {/* Image Container w/ Scroll Glow Effect */}
+            <motion.div 
+              className="w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden relative rounded-sm"
+              initial={{ borderColor: 'rgba(0, 240, 255, 0.1)', boxShadow: '0 0 0px rgba(0, 240, 255, 0)' }}
+              whileInView={{ borderColor: 'rgba(0, 240, 255, 0.8)', boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)' }}
+              viewport={{ once: false, amount: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              style={{ border: '1px solid' }}
+            >
               <div className="absolute inset-0 bg-[#00f0ff]/20 z-10 opacity-0 group-hover:opacity-50 transition-opacity mix-blend-overlay"></div>
-              <img
+              <motion.img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                className="w-full h-full object-cover transition-all"
+                initial={{ filter: 'grayscale(100%)', opacity: 0.7 }}
+                whileInView={{ filter: 'grayscale(0%)', opacity: 1 }}
+                viewport={{ once: false, amount: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               />
-            </div>
+            </motion.div>
 
             {/* Content Container */}
             <div className="w-full md:w-3/5 flex flex-col justify-between">

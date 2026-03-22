@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useRef, useEffect, useState, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, Float, Stars, Instance, Instances, OrbitControls } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Text, Float, Stars, Instance, Instances, OrbitControls, QuadraticBezierLine } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
@@ -33,23 +33,24 @@ const ServerRack = ({ position, rotation }: { position: [number, number, number]
         <boxGeometry args={[1.8, 3.8, 0.05]} />
         <meshStandardMaterial color="#00f0ff" transparent opacity={0.15} roughness={0.1} metalness={0.8} />
       </mesh>
+      {/* Removed rear ventilation/fans per request */}
     </group>
   );
 };
 
 const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0] }: any) => {
   const [hovered, setHovered] = useState(false);
-  
+
   useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
 
   return (
     <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-      <group 
-        position={position} 
+      <group
+        position={position}
         rotation={rotation}
-        onClick={(e) => { e.stopPropagation(); onClick(viewId); }} 
+        onClick={(e) => { e.stopPropagation(); onClick(viewId); }}
         onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
         onPointerOut={(e) => { e.stopPropagation(); setHovered(false); }}
       >
@@ -57,16 +58,16 @@ const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0]
           <boxGeometry args={[6.2, 2.0, 0.1]} />
           <meshStandardMaterial color="#050505" roughness={0.9} metalness={0.5} />
         </mesh>
-        
+
         {/* Glowing Screen centered to be visible on both front and back */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[6, 1.8, 0.12]} />
-          <meshStandardMaterial 
-            color={hovered ? color : '#111'} 
-            emissive={hovered ? color : '#000'} 
-            emissiveIntensity={hovered ? 1.5 : 0} 
-            transparent 
-            opacity={0.9} 
+          <meshStandardMaterial
+            color={hovered ? color : '#111'}
+            emissive={hovered ? color : '#000'}
+            emissiveIntensity={hovered ? 1.5 : 0}
+            transparent
+            opacity={0.9}
             wireframe={!hovered}
           />
         </mesh>
@@ -81,7 +82,7 @@ const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0]
         >
           {label}
         </Text>
-        
+
         {/* Text Back - Double Sided */}
         <Text
           position={[0, 0, -0.16]}
@@ -130,18 +131,41 @@ const DataCore = () => {
   );
 };
 
+// Colorful Wires connecting servers to the Data Core
+const DataCables = () => {
+  return (
+    <group>
+      {/* West Server Cables */}
+      <QuadraticBezierLine start={[-12, 0, 0]} end={[0, 4, 0]} mid={[-6, 0.5, 2]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[-12, 0, 1]} end={[0, 4, 0]} mid={[-6, 1.5, -1]} color="#00ffaa" lineWidth={1.5} dashed={true} dashScale={50} />
+
+      {/* East Server Cables */}
+      <QuadraticBezierLine start={[12, 0, 0]} end={[0, 4, 0]} mid={[6, 0.5, -2]} color="#ff0055" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[12, 0, -1]} end={[0, 4, 0]} mid={[6, 1.5, 1]} color="#ffcc00" lineWidth={1.5} dashed={true} dashScale={50} />
+
+      {/* North Server Cables */}
+      <QuadraticBezierLine start={[0, 0, -12]} end={[0, 4, 0]} mid={[-2, 0.5, -6]} color="#00ffaa" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[1, 0, -12]} end={[0, 4, 0]} mid={[1, 1.5, -6]} color="#00f0ff" lineWidth={1.5} dashed={true} dashScale={50} />
+
+      {/* South Server Cables */}
+      <QuadraticBezierLine start={[0, 0, 12]} end={[0, 4, 0]} mid={[2, 0.5, 6]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
+      <QuadraticBezierLine start={[-1, 0, 12]} end={[0, 4, 0]} mid={[-1, 1.5, 6]} color="#ff0055" lineWidth={1.5} dashed={true} dashScale={50} />
+    </group>
+  );
+};
+
 // Controls the snap effect for dragging
 const CarouselSnapper = ({ currentView, controlsRef }: { currentView: string, controlsRef: any }) => {
   useEffect(() => {
     const controls = controlsRef.current;
     if (!controls) return;
-    
+
     let timeoutId: NodeJS.Timeout;
-    
+
     const onEnd = () => {
       // Only snap if we are in 'home' view
       if (currentView !== 'home') return;
-      
+
       clearTimeout(timeoutId);
       // Wait slightly so momentum dragging completes
       timeoutId = setTimeout(() => {
@@ -149,9 +173,9 @@ const CarouselSnapper = ({ currentView, controlsRef }: { currentView: string, co
         const angle = Math.atan2(obj.position.x, obj.position.z);
         // Snap to nearest 90 degrees (Math.PI / 2)
         const snapped = Math.round(angle / (Math.PI / 2)) * (Math.PI / 2);
-        
-        const radius = Math.sqrt(obj.position.x**2 + obj.position.z**2);
-        
+
+        const radius = Math.sqrt(obj.position.x ** 2 + obj.position.z ** 2);
+
         gsap.to(obj.position, {
           x: Math.sin(snapped) * radius,
           z: Math.cos(snapped) * radius,
@@ -159,9 +183,9 @@ const CarouselSnapper = ({ currentView, controlsRef }: { currentView: string, co
           ease: "power2.out",
           onUpdate: () => controls.update()
         });
-      }, 200); 
+      }, 200);
     };
-    
+
     controls.addEventListener('end', onEnd);
     return () => controls.removeEventListener('end', onEnd);
   }, [controlsRef, currentView]);
@@ -181,23 +205,43 @@ const CameraLight = () => {
 };
 
 const CameraController = ({ currentView, controlsRef, isMobile }: { currentView: string, controlsRef: any, isMobile: boolean }) => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const pc = camera as THREE.PerspectiveCamera;
+    const targetFov = isMobile ? 80 : 50;
+    if (pc.fov !== targetFov) {
+      pc.fov = targetFov;
+      pc.updateProjectionMatrix();
+    }
+  }, [isMobile, camera]);
+
   useEffect(() => {
     if (!controlsRef.current) return;
-    
+
     // Decreased radius to 12
     const targets: Record<string, { pos: [number, number, number], look: [number, number, number] }> = {
-      'home': { 
-        pos: isMobile ? [0, 8, 30] : [0, 8, 22], 
-        look: [0, 4, 0] 
+      'home': {
+        pos: isMobile ? [0, 8, 26] : [0, 8, 22],
+        look: isMobile ? [0, 8, 0] : [0, 4, 0]
       },
       'projects': { pos: [-20, 6, 0], look: [-12, 6, 0] },     // Outside West
       'about': { pos: [20, 6, 0], look: [12, 6, 0] },          // Outside East
       'contact': { pos: [0, 6, -20], look: [0, 6, -12] },      // Outside North
       'education': { pos: [0, 6, 20], look: [0, 6, 12] },      // Outside South
     };
-    
+
     const target = targets[currentView] || targets['home'];
-    
+
+    // If returning to the home hub, we pull the camera out directly backwards 
+    // from whatever server angle the user was last looking at.
+    if (currentView === 'home') {
+      const obj = controlsRef.current.object;
+      const angle = Math.atan2(obj.position.x, obj.position.z);
+      const r = isMobile ? 30 : 22;
+      target.pos = [Math.sin(angle) * r, 8, Math.cos(angle) * r];
+    }
+
     gsap.to(controlsRef.current.object.position, {
       x: target.pos[0],
       y: target.pos[1],
@@ -213,9 +257,9 @@ const CameraController = ({ currentView, controlsRef, isMobile }: { currentView:
       duration: 1.5,
       ease: "power3.inOut"
     });
-    
+
   }, [currentView, controlsRef, isMobile]);
-  
+
   return null;
 };
 
@@ -227,7 +271,7 @@ interface Scene3DProps {
 export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
   const [isMobile, setIsMobile] = useState(false);
   const controlsRef = useRef<any>(null);
-  
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
@@ -243,7 +287,7 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
         <Suspense fallback={null}>
           {/* Increased ambient light so back servers don't disappear into pure blackness */}
           <ambientLight intensity={0.4} />
-          
+
           <pointLight position={[0, -5, 0]} intensity={1.5} color="#00f0ff" distance={40} />
           {/* Dim global overhead light to explicitly highlight shapes of out-of-focus side servers */}
           <pointLight position={[0, 15, 0]} intensity={1} color="#00ffaa" distance={50} />
@@ -251,12 +295,13 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
           <CameraLight />
 
           <gridHelper args={[120, 120, '#001a33', '#001122']} position={[0, 0, 0]} />
-          
+
           {/* Softer fog so background objects fade gracefully instead of being abruptly erased */}
           <fog attach="fog" args={['#020202', 20, isMobile ? 55 : 70]} />
 
           <DataCore />
-          
+          <DataCables />
+
           {/* Servers tightly orbited at nominal radius 12 */}
           <ServerRack position={[-12, 0, 0]} rotation={[0, -Math.PI / 2, 0]} /> {/* West */}
           <ServerRack position={[12, 0, 0]} rotation={[0, Math.PI / 2, 0]} />   {/* East */}
@@ -266,48 +311,48 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
           {/* Nodes face OUTWARDS */}
           {isHome && (
             <>
-              <NavNode 
-                position={[-12, 6, 0]} 
+              <NavNode
+                position={[-12, 6, 0]}
                 rotation={[0, -Math.PI / 2, 0]}
-                label="SYS.PROJECTS" 
+                label="SYS.PROJECTS"
                 viewId="projects"
-                color="#00f0ff" 
-                onClick={setCurrentView} 
+                color="#00f0ff"
+                onClick={setCurrentView}
               />
-              <NavNode 
-                position={[12, 6, 0]} 
+              <NavNode
+                position={[12, 6, 0]}
                 rotation={[0, Math.PI / 2, 0]}
-                label="SYS.ABOUT" 
+                label="SYS.ABOUT"
                 viewId="about"
-                color="#00ffaa" 
-                onClick={setCurrentView} 
+                color="#00ffaa"
+                onClick={setCurrentView}
               />
-              <NavNode 
-                position={[0, 6, -12]} 
+              <NavNode
+                position={[0, 6, -12]}
                 rotation={[0, Math.PI, 0]}
-                label="SYS.CONTACT" 
+                label="SYS.CONTACT"
                 viewId="contact"
-                color="#ff0055" 
-                onClick={setCurrentView} 
+                color="#ff0055"
+                onClick={setCurrentView}
               />
-              <NavNode 
-                position={[0, 6, 12]} 
+              <NavNode
+                position={[0, 6, 12]}
                 rotation={[0, 0, 0]}
-                label="SYS.EDUCATION" 
+                label="SYS.EDUCATION"
                 viewId="education"
-                color="#ffcc00" 
-                onClick={setCurrentView} 
+                color="#ffcc00"
+                onClick={setCurrentView}
               />
             </>
           )}
 
           <Stars radius={40} depth={20} count={3000} factor={3} saturation={0} fade speed={1} />
-          
-          <OrbitControls 
-            ref={controlsRef} 
-            enablePan={false} 
-            enableZoom={false} 
-            maxPolarAngle={Math.PI / 2 + 0.1} 
+
+          <OrbitControls
+            ref={controlsRef}
+            enablePan={false}
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2 + 0.1}
             minPolarAngle={Math.PI / 4}
             autoRotate={isHome && !isMobile}
             autoRotateSpeed={0.5}

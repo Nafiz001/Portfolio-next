@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Hero({ onBrowse }: { onBrowse: () => void }) {
   return (
-    <div className="absolute top-4 right-4 md:top-10 md:right-10 pointer-events-auto z-20">
+    <div className="absolute top-4 left-1/2 -translate-x-1/2 md:-translate-x-0 md:left-auto md:top-10 md:right-10 pointer-events-auto z-20">
       <div className="glass-card bg-black/80 border border-[#00f0ff]/30 p-5 shadow-[#00f0ff]/10 max-w-[320px] relative">
         {/* Hacker styling absolute elements */}
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]"></div>
