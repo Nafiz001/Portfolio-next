@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useRef, useEffect, useState, Suspense } from 'react';
+import React, { useRef, useEffect, useState, useMemo, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Text, Float, Stars, Instance, Instances, OrbitControls, QuadraticBezierLine } from '@react-three/drei';
+import { Text, Float, Stars, Instance, Instances, OrbitControls, Environment } from '@react-three/drei';
 import * as THREE from 'three';
 import gsap from 'gsap';
+import ServerRackModel from './ServerRackModel';
+import NetworkSwitchModel from './NetworkSwitchModel';
 
 // A single Server Rack
 const ServerRack = ({ position, rotation }: { position: [number, number, number], rotation: [number, number, number] }) => {
@@ -37,6 +39,30 @@ const ServerRack = ({ position, rotation }: { position: [number, number, number]
     </group>
   );
 };
+
+// If the GLB hasn't been added yet (or fails to load), fall back to the procedural rack
+// so the scene never crashes. Remove the fallback once your model is in place if you like.
+class RackErrorBoundary extends React.Component<
+  { fallback: React.ReactNode; children: React.ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? this.props.fallback : this.props.children;
+  }
+}
+
+// Tune `scale` to fit the orbit once you see the real model in the scene.
+const Rack = ({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) => (
+  <RackErrorBoundary fallback={<ServerRack position={position} rotation={rotation} />}>
+    <Suspense fallback={<ServerRack position={position} rotation={rotation} />}>
+      <ServerRackModel position={position} rotation={rotation} scale={1} />
+    </Suspense>
+  </RackErrorBoundary>
+);
 
 const NavNode = ({ position, label, onClick, color, viewId, rotation = [0, 0, 0] }: any) => {
   const [hovered, setHovered] = useState(false);
@@ -133,19 +159,68 @@ const DataCore = () => {
   );
 };
 
-// Colorful Wires connecting 6 hexagonal servers to the Data Core
-const DataCables = () => {
+// One physical cable: a thick tube that exits a switch port, sags under "gravity",
+// and runs to a rack, with an RJ45-style connector plugged into the switch.
+const Cable = ({ rackPos, color }: { rackPos: [number, number, number]; color: string }) => {
+  const { tube, switchPlug, rackPlug } = useMemo(() => {
+    const dir = new THREE.Vector3(rackPos[0], 0, rackPos[2]).normalize();
+
+    // Embed slightly INTO the switch body so there's no floating gap (reads as plugged-in).
+    const start = new THREE.Vector3(dir.x * 1.9, 3.95, dir.z * 1.9);
+    // Embed slightly into the rack's inner face, at mid height.
+    const end = new THREE.Vector3(rackPos[0] - dir.x * 0.4, 2.1, rackPos[2] - dir.z * 0.4);
+    // Low midpoint so the cable droops like a hanging wire.
+    const mid = new THREE.Vector3((start.x + end.x) / 2, 0.4, (start.z + end.z) / 2);
+
+    const curve = new THREE.CatmullRomCurve3([start, mid, end]);
+    const tube = new THREE.TubeGeometry(curve, 64, 0.07, 10, false);
+
+    const zAxis = new THREE.Vector3(0, 0, 1);
+    const startQuat = new THREE.Quaternion().setFromUnitVectors(zAxis, curve.getTangentAt(0));
+    const endQuat = new THREE.Quaternion().setFromUnitVectors(zAxis, curve.getTangentAt(1));
+
+    return {
+      tube,
+      switchPlug: { pos: start, quat: startQuat },
+      rackPlug: { pos: end, quat: endQuat },
+    };
+  }, [rackPos]);
+
   return (
     <group>
-      <QuadraticBezierLine start={[0, 0, 12]} end={[0, 4, 0]} mid={[0, 1, 6]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[10.392, 0, 6]} end={[0, 4, 0]} mid={[5, 1, 3]} color="#00ffaa" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[10.392, 0, -6]} end={[0, 4, 0]} mid={[5, 1, -3]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[0, 0, -12]} end={[0, 4, 0]} mid={[0, 1, -6]} color="#ff0055" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[-10.392, 0, -6]} end={[0, 4, 0]} mid={[-5, 1, -3]} color="#ffcc00" lineWidth={2} dashed={true} dashScale={50} />
-      <QuadraticBezierLine start={[-10.392, 0, 6]} end={[0, 4, 0]} mid={[-5, 1, 3]} color="#00f0ff" lineWidth={2} dashed={true} dashScale={50} />
+      <mesh geometry={tube} castShadow>
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.55} roughness={0.5} metalness={0.2} />
+      </mesh>
+      {/* RJ45 connector bodies at both ends */}
+      <mesh position={switchPlug.pos.toArray()} quaternion={switchPlug.quat}>
+        <boxGeometry args={[0.28, 0.28, 0.5]} />
+        <meshStandardMaterial color="#0a0a0a" roughness={0.4} metalness={0.6} />
+      </mesh>
+      <mesh position={rackPlug.pos.toArray()} quaternion={rackPlug.quat}>
+        <boxGeometry args={[0.26, 0.26, 0.45]} />
+        <meshStandardMaterial color="#0a0a0a" roughness={0.4} metalness={0.6} />
+      </mesh>
     </group>
   );
 };
+
+// Colorful cables running from the central switch ports out to each of the 6 racks.
+const RACK_LINKS: { pos: [number, number, number]; color: string }[] = [
+  { pos: [0, 0, 12], color: '#ffcc00' },
+  { pos: [10.392, 0, 6], color: '#00ffaa' },
+  { pos: [10.392, 0, -6], color: '#00f0ff' },
+  { pos: [0, 0, -12], color: '#ff0055' },
+  { pos: [-10.392, 0, -6], color: '#ffcc00' },
+  { pos: [-10.392, 0, 6], color: '#00f0ff' },
+];
+
+const DataCables = () => (
+  <group>
+    {RACK_LINKS.map((link, i) => (
+      <Cable key={i} rackPos={link.pos} color={link.color} />
+    ))}
+  </group>
+);
 
 // Controls the snap effect for dragging
 const CarouselSnapper = ({ currentView, controlsRef }: { currentView: string, controlsRef: any }) => {
@@ -288,21 +363,34 @@ export default function Scene3D({ currentView, setCurrentView }: Scene3DProps) {
 
           <CameraLight />
 
+          {/* Image-based lighting so the rack's PBR textures render in their true colors
+              (like the asset's native render) instead of a flat cyan silhouette. */}
+          <Environment preset="warehouse" environmentIntensity={0.9} />
+
+          {/* Neutral white fill so the model's albedo isn't washed cyan by the theme lights. */}
+          <directionalLight position={[10, 15, 10]} intensity={1.2} color="#ffffff" />
+
           <gridHelper args={[120, 120, '#001a33', '#001122']} position={[0, 0, 0]} />
 
           {/* Softer fog so background objects fade gracefully instead of being abruptly erased */}
           <fog attach="fog" args={['#020202', 20, isMobile ? 55 : 70]} />
 
-          <DataCore />
+          {/* Central network switch / core router. Falls back to the abstract DataCore
+              until public/models/network-switch.glb is added. */}
+          <RackErrorBoundary fallback={<DataCore />}>
+            <Suspense fallback={<DataCore />}>
+              <NetworkSwitchModel position={[0, 4, 0]} scale={1} />
+            </Suspense>
+          </RackErrorBoundary>
           <DataCables />
 
           {/* Hexagonal Servers tightly orbited at nominal radius 12 */}
-          <ServerRack position={[0, 0, 12]} rotation={[0, 0, 0]} />
-          <ServerRack position={[10.392, 0, 6]} rotation={[0, Math.PI / 3, 0]} />
-          <ServerRack position={[10.392, 0, -6]} rotation={[0, 2 * Math.PI / 3, 0]} />
-          <ServerRack position={[0, 0, -12]} rotation={[0, Math.PI, 0]} />
-          <ServerRack position={[-10.392, 0, -6]} rotation={[0, -2 * Math.PI / 3, 0]} />
-          <ServerRack position={[-10.392, 0, 6]} rotation={[0, -Math.PI / 3, 0]} />
+          <Rack position={[0, 0, 12]} rotation={[0, 0, 0]} />
+          <Rack position={[10.392, 0, 6]} rotation={[0, Math.PI / 3, 0]} />
+          <Rack position={[10.392, 0, -6]} rotation={[0, 2 * Math.PI / 3, 0]} />
+          <Rack position={[0, 0, -12]} rotation={[0, Math.PI, 0]} />
+          <Rack position={[-10.392, 0, -6]} rotation={[0, -2 * Math.PI / 3, 0]} />
+          <Rack position={[-10.392, 0, 6]} rotation={[0, -Math.PI / 3, 0]} />
 
           {/* Nodes face OUTWARDS */}
           {isHome && (
