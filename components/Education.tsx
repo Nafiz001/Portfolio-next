@@ -1,33 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { useEducation } from '@/hooks/usePortfolioData';
 
 export default function Education() {
-  const [education, setEducation] = useState<any[]>([
-    {
-      id: 'load',
-      degree: "LOADING SYSTEM...",
-      institution: "Fetching remote records...",
-      date: "Standby",
-      description: "Querying the Firestore connection stream for academic data..."
-    }
-  ]);
-
-  useEffect(() => {
-    const fetchEdu = async () => {
-      try {
-        const snap = await getDocs(collection(db, 'education'));
-        const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        if (data.length > 0) setEducation(data);
-      } catch (e) {
-        console.error('Error fetching education', e);
-      }
-    };
-    fetchEdu();
-  }, []);
+  const { data: education } = useEducation();
 
   return (
     <div className="glass-card w-full p-6 md:p-10 relative bg-black/40 border-[#00f0ff]/30 shadow-[#00f0ff]/10">

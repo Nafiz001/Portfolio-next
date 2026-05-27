@@ -1,54 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-
-import { useState, useEffect } from 'react';
-import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { useSkills } from '@/hooks/usePortfolioData';
+import { getIconForSkill } from '@/lib/skillIcons';
 
 export default function About() {
-  const [skills, setSkills] = useState<string[]>([
-    'html5', 'css3', 'javascript', 'react', 'nodejs'
-  ]);
-
-  const getIconForSkill = (skillStr: string) => {
-    const mapping: Record<string, any> = {
-      'c': { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg' },
-      'c++': { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg' },
-      'cplusplus': { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg' },
-      'nextjs': { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg', invert: true },
-      'threejs': { name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/threejs/threejs-original.svg', invert: true },
-      'dotnet': { name: 'ASP.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dot-net/dot-net-original.svg' },
-      'kubernetes': { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg' },
-      'firebase': { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg' },
-      'express': { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', invert: true },
-      'github': { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', invert: true },
-      'tailwindcss': { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' },
-    };
-
-    const clean = skillStr.toLowerCase().trim();
-    if (mapping[clean]) return mapping[clean];
-
-    return { 
-      name: skillStr.toUpperCase(), 
-      icon: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${clean}/${clean}-original.svg` 
-    };
-  };
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const snap = await getDoc(doc(db, 'about', 'skills'));
-        if (snap.exists() && snap.data().list) {
-          setSkills(snap.data().list);
-        }
-      } catch (e) {
-        console.error("Error fetching skills:", e);
-      }
-    };
-    fetchSkills();
-  }, []);
+  const { data: skills } = useSkills();
 
   return (
     <div className="glass-card w-full p-6 md:p-10 relative bg-black/40 border-[#00f0ff]/30 shadow-[#00f0ff]/10">

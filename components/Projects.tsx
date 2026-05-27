@@ -2,36 +2,13 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { useState } from 'react';
+import { useProjects } from '@/hooks/usePortfolioData';
 
 export default function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [projects, setProjects] = useState<any[]>([
-    {
-      title: "LOADING SYSTEM...",
-      subtitle: "Fetching...",
-      description: "Querying Firestore remote database...",
-      image: "",
-      liveUrl: "#",
-      githubClient: "#",
-      githubServer: "#",
-      tags: ["LOADING"],
-    }
-  ]);
+  const { data: projects } = useProjects();
   const projectsPerPage = 2;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const snap = await getDocs(collection(db, 'projects'));
-        const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        if (data.length > 0) setProjects(data);
-      } catch (err) { console.error('Error fetching projects from Firebase', err); }
-    };
-    fetchData();
-  }, []);
 
   const totalPages = Math.ceil(projects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;

@@ -1,37 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import React from 'react';
+import { useExperience } from '@/hooks/usePortfolioData';
 
 const Experience = () => {
-  const [experiences, setExperiences] = useState<any[]>([
-    {
-      id: 'local_fio',
-      title: 'Prompt Engineer',
-      company: 'fionetix solutions (remote)',
-      date: 'Present',
-      url: 'https://fionetix.com/',
-      description: 'Designing, optimizing, and deploying highly structured and specialized AI prompts to drive complex generative models.'
-    },
-    {
-      id: 'local_ini',
-      title: 'Full Stack Developer Intern',
-      company: 'IniAstra Tech (remote)',
-      date: 'January 2026 — June 2026',
-      url: 'https://iniastratech.com/',
-      description: 'Contributed to the development of robust, scalable web applications utilizing modern JavaScript frameworks.'
-    }
-  ]);
-
-  useEffect(() => {
-    const fetchExp = async () => {
-      try {
-        const snap = await getDocs(collection(db, 'experience'));
-        const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        if (data.length > 0) setExperiences(data);
-      } catch (e) { console.error('Error fetching experience', e); }
-    };
-    fetchExp();
-  }, []);
+  const { data: experiences } = useExperience();
   return (
     <div className="w-full h-full flex items-center justify-center p-4">
       <div className="md:w-3/4 w-full max-w-4xl max-h-[85vh] overflow-y-auto custom-scrollbar glass-card p-5 md:p-8 rounded-xl shadow-[0_0_30px_rgba(0,240,255,0.15)] border-[1px] border-[#00f0ff]/20 bg-[#050505]/90 backdrop-blur-lg">

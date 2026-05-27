@@ -1,31 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FaTrophy, FaMedal } from 'react-icons/fa';
-import { db } from '@/lib/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { useAchievements } from '@/hooks/usePortfolioData';
 
 const Achievements = () => {
-  const [achievements, setAchievements] = useState<any[]>([
-    {
-      id: 'loading',
-      year: '...',
-      title: 'Loading',
-      event: 'Fetching Data...',
-      badge: 'Standby'
-    }
-  ]);
-
-  useEffect(() => {
-    const fetchAch = async () => {
-      try {
-        const snap = await getDocs(collection(db, 'achievements'));
-        const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        if (data.length > 0) setAchievements(data);
-      } catch (e) {
-        console.error('Error fetching achievements', e);
-      }
-    };
-    fetchAch();
-  }, []);
+  const { data: achievements } = useAchievements();
   return (
     <div className="w-full h-full flex items-center justify-center p-4">
       <div className="md:w-3/4 w-full max-w-4xl max-h-[85vh] overflow-y-auto custom-scrollbar glass-card p-5 md:p-8 rounded-xl shadow-[0_0_30px_rgba(255,0,85,0.15)] border-[1px] border-[#ff0055]/20 bg-[#050505]/90 backdrop-blur-lg">

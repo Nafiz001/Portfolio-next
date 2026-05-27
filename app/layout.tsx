@@ -20,10 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceMono.className} bg-[#050505] text-white selection:bg-[#00f0ff]/30 crt overflow-hidden`}>
-        <div className="relative z-10 w-full h-full">
-          {children}
-        </div>
+      <body className={`${spaceMono.className} bg-[#050505] text-white selection:bg-[#00f0ff]/30`}>
+        {children}
       </body>
     </html>
   );
