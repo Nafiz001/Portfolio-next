@@ -1,0 +1,716 @@
+/* ==========================================================================
+   Custom overrides for Md. Nafiz Ahmed's portfolio.
+   Loaded after main.css so these win without editing the vendor stylesheet.
+   ========================================================================== */
+
+/* --- Preloader: first visit per session only (see inline <head> script) -- */
+.skip-preloader .preloader {
+  display: none !important;
+}
+
+/* --- Hero cutout ---------------------------------------------------------
+   A transparent-background portrait cutout, same asset type the template's
+   .banner-three-man slot expects. The source is 433x576 (the template's own
+   was 1122x1402), so it needs an explicit width to sit at a comparable scale,
+   stepping down with the heavily-scaled banner headline behind it. */
+.banner-three-man img {
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+}
+
+@media screen and (max-width: 1399px) {
+  .banner-three-man img {
+    max-width: 360px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .banner-three-man img {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .banner-three-man img {
+    max-width: 240px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .banner-three-man img {
+    max-width: 180px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .banner-three-man img {
+    max-width: 135px;
+  }
+}
+
+/* --- Hero below 1200px ---------------------------------------------------
+   main.css hides both side cards here, which used to leave phones with no
+   name at all. Stack intro -> headline -> portrait -> tagline in normal flow
+   instead of the desktop's absolutely-placed cutout. */
+.hero-mobile-intro {
+  text-align: center;
+  margin-block-end: 28px;
+}
+
+.hero-mobile-name {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: hsl(var(--heading-color));
+  max-width: 34ch;
+  margin: 16px auto 0;
+}
+
+@media screen and (max-width: 1199px) {
+  .banner-three-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-mobile-intro {
+    order: 0;
+  }
+
+  .banner-three-title {
+    order: 1;
+    text-align: center;
+    margin-block-end: 24px !important;
+  }
+
+  .banner-three-man {
+    order: 2;
+    position: static !important;
+    transform: none !important;
+    align-self: center;
+    margin-block-end: 24px;
+  }
+
+  .banner-three-wrap {
+    order: 3;
+  }
+
+  .banner-three-man img {
+    max-width: 300px;
+    /* The cutout PNG has ~23% transparent headroom (the desktop overlap relies
+       on it); pull it up so the stacked layout has no dead gap. Percent margins
+       resolve against the wrapper width, which equals the image width here. */
+    margin-block-start: -28%;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .banner-three-man img {
+    max-width: 230px;
+  }
+}
+
+/* --- Hero achievement chip ----------------------------------------------- */
+.hero-highlight {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-block-end: 24px;
+  border-radius: 12px;
+  background: #0a0a0a;
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: start;
+  transition: background 0.3s;
+}
+
+.hero-highlight i {
+  color: var(--main-two-600);
+  font-size: 1.15rem;
+  margin-block-start: 1px;
+}
+
+.hero-highlight strong {
+  color: #ffb347;
+}
+
+.hero-highlight:hover {
+  background: #1f1f1f;
+  color: #fff;
+}
+
+.hero-mobile-intro .hero-highlight {
+  margin-block: 18px 0;
+}
+
+/* --- Hero tagline legibility ---------------------------------------------
+   A 1px outline with a white fill almost vanishes on the #f5f5f5 hero.
+   Thicken the stroke on desktop; at phone sizes the glyphs are too small for
+   outline type, so render it solid. */
+.banner-three-center-title {
+  -webkit-text-stroke-width: 1.5px;
+}
+
+@media screen and (max-width: 767px) {
+  .banner-three-center-title {
+    -webkit-text-stroke-width: 0;
+    color: hsl(var(--heading-color));
+  }
+}
+
+/* --- Portraits elsewhere ------------------------------------------------- */
+.about-portrait {
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+
+/* --- Project cards -------------------------------------------------------
+   Cards now carry up to three action buttons (live / client / server), so the
+   row must wrap instead of overflowing on narrow screens. */
+.portfolio-three-button {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2);
+}
+
+.portfolio-thumb img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+/* Tag chips are plain labels now (not links), so restore the bordered look
+   the template gave the anchor version. */
+.portfolio-three-list ul li span {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+.portfolio-three-item:hover .portfolio-three-list ul li span {
+  border-color: var(--main-two-600);
+  color: var(--main-two-600);
+}
+
+/* --- Experience ------------------------------------------------------------
+   Editorial rows in the template's language: condensed heading type, hairline
+   rules, orange accent on hover. */
+.experience-area {
+  padding-block: 40px 120px;
+}
+
+.experience-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-block-end: 40px;
+}
+
+.experience-kicker {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.experience-title {
+  order: -1;
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.experience-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(0, 2fr) minmax(0, 3fr);
+  gap: 12px 40px;
+  align-items: baseline;
+  padding-block: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  position: relative;
+  transition: padding-inline 0.35s ease;
+}
+
+.experience-row::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: -1px;
+  width: 3px;
+  background: var(--main-two-600);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s ease;
+}
+
+@media (hover: hover) {
+  .experience-row:hover {
+    padding-inline-start: 20px;
+  }
+
+  .experience-row:hover::before {
+    transform: scaleY(1);
+  }
+}
+
+.experience-date {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #52525b;
+}
+
+.experience-row.is-education .experience-date::before {
+  content: "Education · ";
+  color: var(--main-two-600);
+}
+
+.experience-role h3 {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  margin-block-end: 6px;
+}
+
+.experience-role a,
+.experience-role span {
+  font-weight: 600;
+  color: var(--main-two-600);
+}
+
+.experience-role a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.experience-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #3f3f46;
+  margin: 0;
+}
+
+@media screen and (max-width: 991px) {
+  .experience-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-block: 24px;
+  }
+}
+
+/* --- Project grid ----------------------------------------------------------
+   The template staggers the two columns with a 617px margin on every even
+   card, which only works for exactly two cards. Offset the right column with
+   `translate` instead (no layout cost, and it leaves `transform` free for the
+   hover lift), and pad the grid so the last shifted card has room. */
+.portfolio-grid .portfolio-three-item:nth-child(even) {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .portfolio-grid {
+    padding-block-end: 160px;
+  }
+
+  .portfolio-grid .portfolio-three-item:nth-child(even) {
+    translate: 0 160px;
+  }
+}
+
+.portfolio-grid .portfolio-three-item.is-extra {
+  display: none;
+}
+
+.portfolio-grid.show-all .portfolio-three-item.is-extra {
+  display: block;
+}
+
+.portfolio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-block-start: 24px;
+}
+
+.portfolio-actions .portfolio-three-counter {
+  position: static !important;
+}
+
+.portfolio-three-item h3 {
+  line-height: 1.15;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-end: 14px;
+}
+
+.project-status,
+.project-event {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.project-status {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #555;
+}
+
+.project-status.is-live {
+  border-color: rgba(22, 163, 74, 0.35);
+  color: #15803d;
+  background: rgba(22, 163, 74, 0.08);
+}
+
+.project-status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.project-event {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.project-event i {
+  color: var(--main-two-600);
+}
+
+.project-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--main-two-600);
+  margin-block-end: 10px;
+}
+
+.project-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3f3f46;
+  margin-block-end: 18px;
+  max-width: 60ch;
+}
+
+.portfolio-three-body {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+/* --- Skill labels --------------------------------------------------------
+   These used to be href="#" links. As plain labels they keep the template's
+   pill look but drop the hover fill that implied they were clickable. */
+.portfolio-two-list ul li .skill-tag {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 90px;
+  padding: 6px 20px 6px 40px;
+}
+
+.portfolio-two-list ul li .skill-tag::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  inset-block-start: 50%;
+  inset-inline-start: 20px;
+  background: hsl(var(--white));
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.service-three-title span {
+  transition: color 0.3s;
+}
+
+.service-three-single:hover .service-three-title span {
+  color: var(--main-two-600);
+}
+
+/* --- Skill thumbs --------------------------------------------------------
+   Custom SVGs are authored at the template's 552x257 pill ratio; keep them
+   from stretching and let them scale down cleanly on small screens. */
+.service-three-thumb img {
+  width: 100%;
+  max-width: 552px;
+  height: auto;
+  aspect-ratio: 552/257;
+  object-fit: cover;
+  border-radius: 200px;
+}
+
+@media screen and (max-width: 767px) {
+  .service-three-thumb img {
+    border-radius: 100px;
+  }
+}
+
+/* --- Header --------------------------------------------------------------
+   Let the CTA row wrap rather than push into a horizontal scroll on mid sizes. */
+.header-right {
+  flex-wrap: wrap;
+  row-gap: var(--size-2);
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 1199px) {
+  .header-three-button a,
+  .header-right .tw-hover-btn {
+    padding-inline: var(--size-6);
+  }
+}
+
+/* --- Global safety net ---------------------------------------------------
+   Nothing should be able to force a horizontal scrollbar on small screens. */
+html,
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   Visual polish
+   ========================================================================== */
+
+/* --- Scroll progress bar -------------------------------------------------
+   Thin accent bar across the top that fills as the page scrolls. Width is
+   driven by JS (--scroll-progress). */
+.scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  height: 3px;
+  width: var(--scroll-progress, 0%);
+  background: linear-gradient(90deg, var(--main-two-600), #ffb347);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* --- Available-for-work pulse -------------------------------------------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.status-badge .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #16a34a;
+  position: relative;
+  flex: none;
+}
+
+.status-badge .dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #16a34a;
+  animation: statusPulse 2s ease-out infinite;
+}
+
+@keyframes statusPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* --- Gradient text accent ------------------------------------------------ */
+.accent-gradient {
+  background: linear-gradient(100deg, var(--main-two-600), #ff9a3c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- Hero headline: subtle animated sheen -------------------------------- */
+.banner-three-title {
+  background: linear-gradient(
+    100deg,
+    #0a0a0a 0%,
+    #0a0a0a 40%,
+    var(--main-two-600) 50%,
+    #0a0a0a 60%,
+    #0a0a0a 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: headlineSheen 9s ease-in-out infinite;
+}
+
+@keyframes headlineSheen {
+  0%,
+  100% {
+    background-position: 130% 50%;
+  }
+  50% {
+    background-position: -30% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-three-title {
+    animation: none;
+    background: none;
+    color: #0a0a0a;
+  }
+
+  .status-badge .dot::after {
+    animation: none;
+  }
+}
+
+/* --- Skill rows: lift + accent glow on hover ----------------------------- */
+.service-three-single {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-three-single::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 74, 15, 0.14),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.service-three-single:hover::before {
+  opacity: 1;
+}
+
+.service-three-single:hover {
+  transform: translateY(-4px);
+}
+
+.service-three-thumb img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-three-single:hover .service-three-thumb img {
+  transform: scale(1.05);
+}
+
+/* --- Project cards: image zoom + accent frame ---------------------------- */
+.portfolio-thumb {
+  overflow: hidden;
+  position: relative;
+}
+
+.portfolio-thumb img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-three-item:hover .portfolio-thumb img {
+  transform: scale(1.06);
+}
+
+.portfolio-three-item {
+  transition: transform 0.4s ease;
+}
+
+.portfolio-three-item:hover {
+  transform: translateY(-6px);
+}
+
+/* --- Counters: accent the numerals --------------------------------------- */
+.banner-three-counter-title .purecounter {
+  background: linear-gradient(120deg, var(--main-two-600), #ff9a3c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.banner-three-counter-item.bg-black .banner-three-counter-title .purecounter {
+  background: linear-gradient(120deg, #ffb347, #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- Section heading: small accent rule ----------------------------------
+   Only on the About intro heading. The "works" watermark behind the portfolio
+   grid is 642px decorative type and must stay unadorned. */
+.about-three-title::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: 28px auto 0;
+  border-radius: 4px;
+  background: var(--main-two-600);
+}
+
+/* --- Contact form note ---------------------------------------------------- */
+.contact-note {
+  margin-block-start: 14px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-note a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Footer: nicer focus + link affordance ------------------------------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--main-two-600);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

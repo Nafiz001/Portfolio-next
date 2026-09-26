@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img" aria-label="Achievement">
+  <defs>
+    <linearGradient id="acBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7A34"/>
+      <stop offset="55%" stop-color="#FF4A0F"/>
+      <stop offset="100%" stop-color="#A82400"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#acBg)"/>
+  <circle cx="480" cy="70" r="150" fill="#FFA470" opacity=".22"/>
+  <circle cx="110" cy="350" r="150" fill="#8F1E00" opacity=".28"/>
+
+  <!-- trophy -->
+  <g transform="translate(300 200)" fill="#FFF6F0">
+    <path d="M-52 -92 h104 v34 a52 52 0 0 1 -104 0 Z" opacity=".95"/>
+    <path d="M-52 -84 h-26 a26 26 0 0 0 26 44 Z" opacity=".8"/>
+    <path d="M52 -84 h26 a26 26 0 0 1 -26 44 Z" opacity=".8"/>
+    <rect x="-10" y="-6" width="20" height="44" rx="6" opacity=".95"/>
+    <rect x="-44" y="38" width="88" height="18" rx="8" opacity=".95"/>
+    <rect x="-58" y="58" width="116" height="18" rx="8" opacity=".85"/>
+  </g>
+  <g transform="translate(300 200)" fill="#FF4A0F" opacity=".6">
+    <path d="M0 -80 l9 19 21 3 -15 15 4 21 -19 -10 -19 10 4 -21 -15 -15 21 -3 Z"/>
+  </g>
+
+  <!-- sparks -->
+  <g fill="#FFF1E6" opacity=".7">
+    <circle cx="120" cy="110" r="6"/>
+    <circle cx="470" cy="300" r="6"/>
+    <circle cx="500" cy="150" r="4"/>
+    <circle cx="140" cy="290" r="4"/>
+  </g>
+</svg>

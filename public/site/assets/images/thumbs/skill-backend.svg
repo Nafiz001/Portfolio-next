@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 257" width="552" height="257" role="img" aria-label="Backend and databases">
+  <defs>
+    <linearGradient id="beBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8340"/>
+      <stop offset="50%" stop-color="#FF4A0F"/>
+      <stop offset="100%" stop-color="#B32700"/>
+    </linearGradient>
+    <linearGradient id="beDisc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF3EA"/>
+      <stop offset="100%" stop-color="#FFB88C"/>
+    </linearGradient>
+    <clipPath id="beClip"><rect width="552" height="257" rx="128.5"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#beClip)">
+    <rect width="552" height="257" fill="url(#beBg)"/>
+    <circle cx="110" cy="30" r="140" fill="#FF9E62" opacity=".25"/>
+    <circle cx="470" cy="240" r="150" fill="#9E2200" opacity=".32"/>
+
+    <!-- database cylinder stack -->
+    <g transform="translate(180 128)">
+      <g opacity=".95">
+        <ellipse cx="0" cy="46" rx="76" ry="24" fill="#8F1E00" opacity=".55"/>
+        <path d="M-76 -34 v80 a76 24 0 0 0 152 0 v-80 Z" fill="url(#beDisc)" opacity=".92"/>
+        <ellipse cx="0" cy="-34" rx="76" ry="24" fill="#FFFDFB"/>
+        <ellipse cx="0" cy="-34" rx="52" ry="15" fill="#FF5A22" opacity=".35"/>
+      </g>
+      <g opacity=".8" transform="translate(0 -46)">
+        <path d="M-76 -30 v52 a76 24 0 0 0 152 0 v-52 Z" fill="#FFE0CD" opacity=".85"/>
+        <ellipse cx="0" cy="-30" rx="76" ry="24" fill="#FFF8F3"/>
+        <ellipse cx="0" cy="-30" rx="52" ry="15" fill="#FF5A22" opacity=".3"/>
+      </g>
+    </g>
+
+    <!-- server node graph -->
+    <g transform="translate(390 128)" stroke="#FFF1E6" stroke-width="5" fill="none" opacity=".92">
+      <path d="M-72 0 H-24" stroke-linecap="round"/>
+      <path d="M0 -58 V-22 M0 22 V58" stroke-linecap="round"/>
+      <path d="M0 0 L58 -44 M0 0 L58 44" stroke-linecap="round" opacity=".75"/>
+    </g>
+    <g transform="translate(390 128)" fill="#FFF6F0">
+      <rect x="-22" y="-22" width="44" height="44" rx="12"/>
+      <circle cx="0" cy="-68" r="13" opacity=".92"/>
+      <circle cx="0" cy="68" r="13" opacity=".92"/>
+      <circle cx="68" cy="-52" r="11" opacity=".8"/>
+      <circle cx="68" cy="52" r="11" opacity=".8"/>
+    </g>
+    <rect x="378" y="118" width="24" height="6" rx="3" fill="#FF4A0F" opacity=".8"/>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 257" width="552" height="257" role="img" aria-label="UI/UX and frontend">
+  <defs>
+    <linearGradient id="feBg" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C22C00"/>
+      <stop offset="50%" stop-color="#FF4A0F"/>
+      <stop offset="100%" stop-color="#FF8B48"/>
+    </linearGradient>
+    <linearGradient id="feCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFCFA"/>
+      <stop offset="100%" stop-color="#FFD3B8"/>
+    </linearGradient>
+    <clipPath id="feClip"><rect width="552" height="257" rx="128.5"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#feClip)">
+    <rect width="552" height="257" fill="url(#feBg)"/>
+    <circle cx="470" cy="40" r="140" fill="#FFA470" opacity=".26"/>
+    <circle cx="90" cy="220" r="140" fill="#962000" opacity=".3"/>
+
+    <!-- browser frame with layout grid -->
+    <g transform="translate(276 128)">
+      <rect x="-142" y="-84" width="284" height="168" rx="20" fill="url(#feCard)" opacity=".95"/>
+      <rect x="-142" y="-84" width="284" height="34" rx="20" fill="#FFE8DA"/>
+      <rect x="-142" y="-66" width="284" height="16" fill="#FFE8DA"/>
+      <g fill="#FF5A22" opacity=".75">
+        <circle cx="-122" cy="-67" r="6"/>
+        <circle cx="-103" cy="-67" r="6"/>
+        <circle cx="-84" cy="-67" r="6"/>
+      </g>
+      <!-- content blocks -->
+      <rect x="-122" y="-34" width="112" height="58" rx="12" fill="#FF5A22" opacity=".8"/>
+      <rect x="4" y="-34" width="118" height="24" rx="10" fill="#FF7A45" opacity=".65"/>
+      <rect x="4" y="0" width="80" height="24" rx="10" fill="#FF7A45" opacity=".45"/>
+      <rect x="-122" y="38" width="244" height="26" rx="12" fill="#FF9366" opacity=".5"/>
+    </g>
+
+    <!-- cursor + responsive breakpoint marks -->
+    <g transform="translate(352 176)">
+      <path d="M0 0 L0 42 L11 32 L19 50 L29 45 L21 28 L36 27 Z" fill="#FFFDFC" stroke="#B32700" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g stroke="#FFF1E6" stroke-width="5" stroke-linecap="round" opacity=".8">
+      <path d="M78 104 V152"/>
+      <path d="M474 104 V152"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Nafiz Ahmed">
+  <defs>
+    <linearGradient id="fv" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7A34"/>
+      <stop offset="100%" stop-color="#E33900"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0A0A0A"/>
+  <path d="M18 46 V18 h6 l16 20 V18 h6 v28 h-6 L24 26 v20 Z" fill="url(#fv)"/>
+  <circle cx="49" cy="45" r="4" fill="#FF4A0F"/>
+</svg>

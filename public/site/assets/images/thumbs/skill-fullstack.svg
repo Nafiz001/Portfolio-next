@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 257" width="552" height="257" role="img" aria-label="Full-stack development">
+  <defs>
+    <linearGradient id="fsBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7A34"/>
+      <stop offset="45%" stop-color="#FF4A0F"/>
+      <stop offset="100%" stop-color="#C22C00"/>
+    </linearGradient>
+    <linearGradient id="fsPlaneA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD9C4" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#FF8A4D" stop-opacity=".75"/>
+    </linearGradient>
+    <linearGradient id="fsPlaneB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3EA" stop-opacity=".85"/>
+      <stop offset="100%" stop-color="#FF9E68" stop-opacity=".55"/>
+    </linearGradient>
+    <clipPath id="fsClip"><rect width="552" height="257" rx="128.5"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#fsClip)">
+    <rect width="552" height="257" fill="url(#fsBg)"/>
+    <circle cx="430" cy="40" r="150" fill="#FF9152" opacity=".28"/>
+    <circle cx="120" cy="230" r="130" fill="#A82400" opacity=".30"/>
+
+    <!-- isometric stacked layers: the "stack" in full-stack -->
+    <g transform="translate(276 128)">
+      <g opacity=".95">
+        <path d="M0 -62 L118 -6 L0 50 L-118 -6 Z" fill="url(#fsPlaneA)"/>
+        <path d="M0 50 L118 -6 L118 8 L0 64 Z" fill="#8F1E00" opacity=".45"/>
+        <path d="M0 50 L-118 -6 L-118 8 L0 64 Z" fill="#6B1600" opacity=".5"/>
+      </g>
+      <g opacity=".8" transform="translate(0 34)">
+        <path d="M0 -62 L118 -6 L0 50 L-118 -6 Z" fill="url(#fsPlaneB)"/>
+        <path d="M0 50 L118 -6 L118 8 L0 64 Z" fill="#8F1E00" opacity=".4"/>
+        <path d="M0 50 L-118 -6 L-118 8 L0 64 Z" fill="#6B1600" opacity=".45"/>
+      </g>
+      <g opacity=".6" transform="translate(0 68)">
+        <path d="M0 -62 L118 -6 L0 50 L-118 -6 Z" fill="#FFE3D2" opacity=".8"/>
+      </g>
+    </g>
+
+    <!-- code brackets -->
+    <g stroke="#FFF1E6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9">
+      <path d="M96 96 L66 128 L96 160"/>
+      <path d="M456 96 L486 128 L456 160"/>
+    </g>
+    <path d="M262 84 L290 172" stroke="#FFF1E6" stroke-width="7" stroke-linecap="round" opacity=".5"/>
+  </g>
+</svg>

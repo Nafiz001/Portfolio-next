@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '@/lib/firebase';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { collection, writeBatch, doc } from 'firebase/firestore';
 import AdminCrud, { FieldDef } from '@/components/admin/AdminCrud';
 import AdminSkills from '@/components/admin/AdminSkills';
@@ -10,6 +10,8 @@ import AdminSkills from '@/components/admin/AdminSkills';
 const projectsSchema: FieldDef[] = [
   { key: 'title', label: 'Project Title', type: 'text' },
   { key: 'subtitle', label: 'Platform Type', type: 'text' },
+  { key: 'event', label: 'Hackathon / Award (optional)', type: 'text' },
+  { key: 'order', label: 'Sort Order (lower shows first; featured projects use 1-9)', type: 'text' },
   { key: 'description', label: 'Description', type: 'textarea' },
   { key: 'tags', label: 'Tags (Comma separated)', type: 'array' },
   { key: 'liveUrl', label: 'Live URL', type: 'text' },
@@ -42,8 +44,8 @@ const eduSchema: FieldDef[] = [
 
 export default function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
-  const [email, setEmail] = useState('admin@nafiz.dev');
-  const [password, setPassword] = useState('NafizAdmin2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552 257" width="552" height="257" role="img" aria-label="Tools and practices">
+  <defs>
+    <linearGradient id="tlBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B28"/>
+      <stop offset="55%" stop-color="#FF4A0F"/>
+      <stop offset="100%" stop-color="#A82400"/>
+    </linearGradient>
+    <clipPath id="tlClip"><rect width="552" height="257" rx="128.5"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#tlClip)">
+    <rect width="552" height="257" fill="url(#tlBg)"/>
+    <circle cx="150" cy="35" r="135" fill="#FFA470" opacity=".24"/>
+    <circle cx="430" cy="235" r="145" fill="#8F1E00" opacity=".3"/>
+
+    <!-- git branch graph -->
+    <g stroke="#FFF1E6" stroke-width="7" fill="none" stroke-linecap="round">
+      <path d="M120 128 H432" opacity=".95"/>
+      <path d="M196 128 C 232 128, 232 62, 268 62 H340 C 376 62, 376 128, 412 128" opacity=".8"/>
+      <path d="M244 128 C 280 128, 280 194, 316 194 H364 C 400 194, 400 128, 432 128" opacity=".6"/>
+    </g>
+    <g fill="#FFFBF8">
+      <circle cx="120" cy="128" r="17"/>
+      <circle cx="276" cy="128" r="14" opacity=".9"/>
+      <circle cx="432" cy="128" r="17"/>
+      <circle cx="300" cy="62" r="14" opacity=".92"/>
+      <circle cx="340" cy="194" r="14" opacity=".85"/>
+    </g>
+    <g fill="#FF4A0F">
+      <circle cx="120" cy="128" r="7"/>
+      <circle cx="432" cy="128" r="7"/>
+    </g>
+
+    <!-- check marks: testing / practices -->
+    <g stroke="#FFF1E6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+      <path d="M62 118 l14 14 l24 -28"/>
+      <path d="M462 152 l14 14 l24 -28" opacity=".7"/>
+    </g>
+  </g>
+</svg>

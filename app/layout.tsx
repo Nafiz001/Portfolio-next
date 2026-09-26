@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
 
+// Only the /admin panel renders through this layout — the public portfolio is the
+// static site in public/site, which loads its own fonts and stylesheets.
 const spaceMono = Space_Mono({
   weight: ['400', '700'],
   subsets: ["latin"],

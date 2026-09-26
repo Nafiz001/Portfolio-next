@@ -1,0 +1,146 @@
+[
+  {
+    "id": "f1-vantage",
+    "order": 1,
+    "title": "Vantage · Robot Arm Suite",
+    "subtitle": "6-DOF arm simulation & control",
+    "event": "Techathon Nationals 2026",
+    "description": "One safety-gated motion pipeline for a 6-DOF industrial arm, driven six ways: joystick, keyboard, Whisper voice, autonomous PIN entry, an LLM agent and webcam hand gestures.",
+    "image": "/images/projects/vantage.jpg",
+    "liveUrl": "https://logarithm-techathon.vercel.app",
+    "githubClient": "https://github.com/Nafiz001/logarithm-techathon",
+    "tags": [
+      "React",
+      "Three.js",
+      "Whisper",
+      "LLM agent"
+    ]
+  },
+  {
+    "id": "f2-codoctor",
+    "order": 2,
+    "title": "CoDoctor",
+    "subtitle": "Bangla clinical co-pilot",
+    "event": "SciBlitz AI Challenge 2026",
+    "description": "Two phones listen to a Bangla consultation and fuse one transcript; a LangGraph agent team cites clinical guidelines while deterministic rule engines, never the LLM, catch danger signs and drug interactions.",
+    "image": "/images/projects/codoctor.jpg",
+    "githubClient": "https://github.com/Nafiz001/codoctor",
+    "tags": [
+      "Next.js",
+      "FastAPI",
+      "LangGraph",
+      "Azure"
+    ]
+  },
+  {
+    "id": "f7-ghostline",
+    "order": 3,
+    "title": "Ghostline",
+    "subtitle": "Low-poly hover racer",
+    "description": "Race your own best lap: a deterministic, hash-verified physics sim replays ghosts from input logs, so any lap can be shared as a URL. Procedural GLSL sky and track shaders, 35 tests over the sim core.",
+    "image": "/images/projects/ghostline.jpg",
+    "liveUrl": "https://nafiz001.github.io/ghostline-threejs/",
+    "githubClient": "https://github.com/Nafiz001/ghostline-threejs",
+    "tags": [
+      "Three.js",
+      "TypeScript",
+      "GLSL",
+      "Vitest"
+    ]
+  },
+  {
+    "id": "f3-warehouse",
+    "order": 4,
+    "title": "Logarithm Warehouse",
+    "subtitle": "Resilient microservices platform",
+    "event": "BUET CSE Fest 2026 Hackathon",
+    "description": "A fragile e-commerce monolith rebuilt as Order and Inventory services with Redis-backed deterministic chaos testing across scaled replicas, Nginx load balancing, Prometheus/Grafana and CI/CD to Azure.",
+    "image": "/images/projects/warehouse.jpg",
+    "githubClient": "https://github.com/Nafiz001/logarithm-warehouse",
+    "tags": [
+      "Microservices",
+      "Docker",
+      "Redis",
+      "Grafana"
+    ]
+  },
+  {
+    "id": "f4-vernissage",
+    "order": 5,
+    "title": "Vernissage",
+    "subtitle": "Multiplayer 3D art exhibitions",
+    "description": "Curate your own exhibition from 8,000+ public-domain works from The Met and the Cleveland Museum of Art, then walk through it in 3D with friends: a Go API and WebSocket hub behind a Next.js front end.",
+    "image": "/images/projects/vernissage.jpg",
+    "githubClient": "https://github.com/Nafiz001/vernissage",
+    "tags": [
+      "Go",
+      "PostgreSQL",
+      "Next.js",
+      "React Three Fiber"
+    ]
+  },
+  {
+    "id": "f8-swarmlight",
+    "order": 6,
+    "title": "Swarmlight",
+    "subtitle": "Canvas survivors-like",
+    "description": "1,500 enemies at 60 fps on a single canvas with zero dependencies: spatial hashing, a boot-time sprite atlas and pooled typed arrays so the garbage collector never drops a frame.",
+    "image": "/images/projects/swarmlight.jpg",
+    "liveUrl": "https://nafiz001.github.io/swarmlight-canvas/",
+    "githubClient": "https://github.com/Nafiz001/swarmlight-canvas",
+    "tags": [
+      "TypeScript",
+      "Canvas 2D",
+      "Vite",
+      "Game dev"
+    ]
+  },
+  {
+    "id": "f5-visionbridge",
+    "order": 7,
+    "title": "VisionBridge",
+    "subtitle": "AI audio descriptions for blind learners",
+    "event": "Build with Gemma Hackathon",
+    "description": "Watches YouTube tutorials alongside blind and low-vision learners, decides when the screen actually matters, and speaks a short Gemma-written description in the narrator's natural pauses.",
+    "image": "/images/projects/visionbridge.jpg",
+    "githubClient": "https://github.com/Nafiz001/VisionBridge",
+    "tags": [
+      "Gemma 4",
+      "Whisper",
+      "JavaScript",
+      "Accessibility"
+    ]
+  },
+  {
+    "id": "f6-takaflow",
+    "order": 8,
+    "title": "TakaFlow",
+    "subtitle": "Money movement platform",
+    "event": "PSTU IT Carnival 2026 Hackathon",
+    "description": "A digital wallet to send, request, split and schedule money on a double-entry ledger that always adds up: idempotent transfers, three API replicas behind Nginx, PgBouncer and a monthly-partitioned Postgres.",
+    "image": "/images/projects/takaflow.jpg",
+    "githubClient": "https://github.com/Nafiz001/pstu_hackathon",
+    "tags": [
+      "TypeScript",
+      "PostgreSQL",
+      "Redis",
+      "Nginx"
+    ]
+  },
+  {
+    "id": "f9-shopcircuit",
+    "order": 9,
+    "title": "ShopCircuit",
+    "subtitle": "E-commerce storefront",
+    "description": "A full storefront with cart, checkout, wishlist and order tracking, plus an admin panel for catalogue and content, on React and Firebase with a Node/Express payment backend.",
+    "image": "/images/projects/shopcircuit.jpg",
+    "liveUrl": "https://shopcircuit.vercel.app",
+    "githubClient": "https://github.com/Nafiz001/E-Commerce-",
+    "tags": [
+      "React",
+      "Firebase",
+      "Express",
+      "Tailwind CSS"
+    ]
+  }
+]

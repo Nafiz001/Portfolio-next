@@ -1,51 +1,9 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --primary: 0 240 255; /* Cyan */
-    --background: 5 5 5; /* Deep Charcoal */
-    --accent: 0 255 170; /* Mint / Tech Green */
-
-    /* Refined 2D palette — dark slate base + single electric-blue accent (#3b82f6) */
-    --ink: 15 23 42;            /* slate-900 base */
-    --ink-2: 2 6 23;            /* slate-950 deeper base */
-    --surface: 30 41 59;        /* slate-800 cards */
-    --border-subtle: 51 65 85;  /* slate-700 hairlines */
-    --text: 226 232 240;        /* slate-200 body */
-    --text-muted: 148 163 184;  /* slate-400 secondary */
-    --text-heading: 248 250 252;/* near-white headings */
-    --brand: 59 130 246;        /* electric blue accent */
-    --brand-soft: 96 165 250;   /* blue-400 hover */
-  }
-}
+/* The public portfolio is the static site in public/site (with its own stylesheets).
+   These utilities are only used by the /admin panel. */
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-shadow-cyan {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
-  }
-
-  /* Soft scanline overlay */
-  .crt::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.1) 50%
-    );
-    z-index: 100;
-    background-size: 100% 4px;
-    pointer-events: none;
-  }
-
   .glass-card {
     background: rgba(10, 10, 10, 0.7);
     backdrop-filter: blur(16px);
@@ -59,59 +17,10 @@
     width: 100%;
   }
 
-
-
   .glass-card:hover {
     border: 1px solid rgba(0, 240, 255, 0.5);
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
   }
-
-  /* ---- Refined 2D (normal mode) utilities ---- */
-  .surface-card {
-    background: rgb(var(--surface) / 0.35);
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-    border: 1px solid rgb(var(--border-subtle) / 0.7);
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 24px rgb(0 0 0 / 0.25);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .surface-card:hover {
-    border-color: rgb(var(--brand) / 0.55);
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.35), 0 0 0 1px rgb(var(--brand) / 0.2);
-    transform: translateY(-3px);
-  }
-
-  .text-accent {
-    color: rgb(var(--brand));
-  }
-
-  .text-muted {
-    color: rgb(var(--text-muted));
-  }
-
-  .link-accent {
-    color: rgb(var(--brand));
-    transition: color 0.2s ease;
-  }
-
-  .link-accent:hover {
-    color: rgb(var(--brand-soft));
-  }
-
-  .nav-active {
-    color: rgb(var(--brand));
-  }
-}
-
-.gradient-bg {
-  background: radial-gradient(circle at center, rgb(0 240 255 / 0.05) 0%, rgb(5 5 5 / 1) 100%);
-}
-
-.pattern-dots {
-  background-image: radial-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
 }
 
 .custom-scrollbar {

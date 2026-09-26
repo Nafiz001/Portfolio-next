@@ -1,0 +1,1781 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Md. Nafiz Ahmed - Software Engineer Portfolio. Full-stack developer building performant, robust and scalable web applications."
+    />
+    <meta
+      name="keywords"
+      content="Md. Nafiz Ahmed, Software Engineer, Full-Stack Developer, React, Next.js, Portfolio"
+    />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title -->
+    <title>Md. Nafiz Ahmed - Software Engineer Portfolio</title>
+    <script>
+      // Decide before first paint whether the intro loader should show at all:
+      // only on the first visit of a session, never for reduced-motion users.
+      (function () {
+        var seen = false;
+        try {
+          seen = sessionStorage.getItem('preloaderSeen') === '1';
+        } catch (e) {}
+        if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('skip-preloader');
+        }
+      })();
+    </script>
+    <!-- Favicon -->
+    <link rel="icon" href="/site/assets/images/logo/favicon.svg" type="image/svg+xml" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/site/assets/css/bootstrap.min.css" />
+    <!-- aos -->
+    <link rel="stylesheet" href="/site/assets/css/aos.css" />
+    <!-- Main css -->
+    <link rel="stylesheet" href="/site/assets/css/main.css" />
+    <!-- Custom overrides (must load last) -->
+    <link rel="stylesheet" href="/site/assets/css/custom.css" />
+  </head>
+
+  <body class="tw-magic-cursor">
+    <!--==================== Preloader Start ====================-->
+    <div class="preloader">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+        <path
+          id="preloaderSvg"
+          d="M0,1005S175,995,500,995s500,5,500,5V0H0Z"
+        ></path>
+      </svg>
+      <div class="preloader-heading">
+        <div class="load-text">
+          <span>L</span>
+          <span>o</span>
+          <span>a</span>
+          <span>d</span>
+          <span>i</span>
+          <span>n</span>
+          <span>g</span>
+        </div>
+      </div>
+    </div>
+    <!--==================== Preloader End ====================-->
+
+    <!--==================== Overlay Start ====================-->
+    <div class="overlay"></div>
+    <!--==================== Overlay End ====================-->
+
+    <!--==================== Sidebar Overlay End ====================-->
+    <div class="side-overlay"></div>
+    <!--==================== Sidebar Overlay End ====================-->
+
+    <!--==================== Begin Magic Cursor Start ====================-->
+    <div id="magic-cursor">
+      <div id="ball"></div>
+    </div>
+    <!--==================== Begin Magic Cursor End ====================-->
+
+    <!-- Custom Toast Message start -->
+    <div id="toast-container"></div>
+    <!-- Custom Toast Message End -->
+
+    <!-- Scroll progress indicator -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- ==================== Scroll to Top End Here ==================== -->
+    <div class="back-to-top-wrapper">
+      <button id="back_to_top" type="button" class="back-to-top-btn">
+        <svg
+          width="12"
+          height="7"
+          viewBox="0 0 12 7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 6L6 1L1 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- ==================== Scroll to Top End Here ==================== -->
+
+    <!-- ==================== Offcanvus Mobile Menu Start Here ==================== -->
+    <div class="tw-offcanvas-2-area p-relative">
+      <div class="tw-offcanvas-2-bg is-left left-box"></div>
+      <div class="tw-offcanvas-2-bg is-right right-box d-none d-md-block"></div>
+      <div class="tw-offcanvas-2-wrapper">
+        <div class="tw-offcanvas-2-left left-box">
+          <div
+            class="tw-offcanvas-2-left-wrap d-flex justify-content-between align-items-center"
+          >
+            <div class="twoffcanvas__logo">
+              <a class="logo-1 fw-bold text-white tw-text-2xl" href="/">Nafiz<span class="text-main-two-600">.</span></a>
+            </div>
+            <div class="tw-offcanvas-2-close d-md-none text-end">
+              <button class="tw-offcanvas-2-close-btn tw-offcanvas-2-close-btn">
+                <span class="text">
+                  <span class="text-white">close</span>
+                </span>
+                <span class="d-inline-block">
+                  <span>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        width="32.621"
+                        height="1.00918"
+                        transform="matrix(0.704882 0.709325 -0.704882 0.709325 1.0061 0)"
+                        fill="currentcolor"
+                      />
+                      <rect
+                        width="32.621"
+                        height="1.00918"
+                        transform="matrix(0.704882 -0.709325 0.704882 0.709325 0 23.2842)"
+                        fill="currentcolor"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="tw-main-menu-mobile menu-hover-active counter-row">
+            <nav></nav>
+          </div>
+        </div>
+        <div
+          class="tw-offcanvas-2-right right-box d-none d-md-block p-relative"
+        >
+          <div class="tw-offcanvas-2-close text-end">
+            <button class="tw-offcanvas-2-close-btn">
+              <span class="text">
+                <span>close</span>
+              </span>
+              <span class="d-inline-block">
+                <span>
+                  <svg
+                    width="38"
+                    height="38"
+                    viewBox="0 0 38 38"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.80859 9.80762L28.1934 28.1924"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9.80859 28.1924L28.1934 9.80761"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="tw-offcanvas-2-right-inner d-flex flex-column justify-content-between h-100"
+          >
+            <div class="twoffcanvas__contact-info">
+              <div class="twoffcanvas__contact-title">
+                <h5 class="text-white">Contact us</h5>
+              </div>
+              <ul>
+                <li>
+                  <span class="text-main-two-600 tw-text-xl"
+                    ><i class="ph ph-map-pin-line"></i
+                  ></span>
+                  <a
+                    class="text-white"
+                    href="https://www.google.com/maps/place/Khulna+University+of+Engineering+%26+Technology"
+                    target="_blank"
+                    >Khulna, Bangladesh</a
+                  >
+                </li>
+                <li>
+                  <span class="text-main-two-600 tw-text-xl"
+                    ><i class="ph ph-envelope"></i
+                  ></span>
+                  <a class="text-white" href="mailto:nafizahmed000@gmail.com"
+                    >nafizahmed000@gmail.com</a
+                  >
+                </li>
+                <li>
+                  <span class="text-main-two-600 tw-text-xl"
+                    ><i class="ph ph-phone-call"></i
+                  ></span>
+                  <a class="text-white" href="tel:+8801634324335"
+                    >+880 1634-324335</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="footer-social"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            >
+              <ul class="tw-gap-2">
+                <li>
+                  <a href="https://www.linkedin.com/in/md-nafiz-ahmed-nafiz/" target="_blank" rel="noopener noreferrer">
+                    <span
+                      class="active-media d-flex align-items-center tw-gap-1"
+                      >LINKEDIN <i class="ph ph-arrow-bend-up-right"></i
+                    ></span>
+                    <span class="hover-media"
+                      ><i class="ph ph-linkedin-logo"></i
+                    ></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/Nafiz001" target="_blank" rel="noopener noreferrer">
+                    <span
+                      class="active-media d-flex align-items-center tw-gap-1"
+                      >GITHUB <i class="ph ph-arrow-bend-up-right"></i
+                    ></span>
+                    <span class="hover-media"
+                      ><i class="ph ph-github-logo"></i
+                    ></span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://web.facebook.com/nafiz.ahmed.503092" target="_blank" rel="noopener noreferrer">
+                    <span
+                      class="active-media d-flex align-items-center tw-gap-1"
+                      >FACEBOOK <i class="ph ph-arrow-bend-up-right"></i
+                    ></span>
+                    <span class="hover-media"
+                      ><i class="ph ph-facebook-logo"></i
+                    ></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ==================== Offcanvus Mobile Menu End Here ==================== -->
+
+    <!-- ==================== Header Start Here ==================== -->
+    <header
+      class="header header-two header-three tw-transition-all tw-z-99 position-relative"
+    >
+      <div class="container tw-container-1800-px">
+        <nav
+          class="d-flex align-items-center justify-content-between position-relative"
+        >
+          <!-- Logo Start -->
+          <div class="header-three-logo tw-rounded-md">
+            <a href="/" class="link fw-bold text-heading tw-text-2xl">
+              Nafiz<span class="text-main-two-600">.</span>
+            </a>
+          </div>
+          <!-- Logo End  -->
+
+          <!-- Menu Start  -->
+          <div class="header-three-social d-none d-lg-block">
+            <ul class="d-flex tw-gap-205">
+              <li>
+                <a
+                  class="tw-w-13 tw-h-13 lh-1 d-inline-flex justify-content-center align-items-center text-heading tw-text-xl tw-rounded-md"
+                  href="https://web.facebook.com/nafiz.ahmed.503092" target="_blank" rel="noopener noreferrer"
+                  ><i class="ph-bold ph-facebook-logo"></i
+                ></a>
+              </li>
+              <li>
+                <a
+                  class="tw-w-13 tw-h-13 lh-1 d-inline-flex justify-content-center align-items-center text-heading tw-text-xl tw-rounded-md"
+                  href="https://github.com/Nafiz001" target="_blank" rel="noopener noreferrer"
+                  ><i class="ph-bold ph-github-logo"></i
+                ></a>
+              </li>
+              <li>
+                <a
+                  class="tw-w-13 tw-h-13 lh-1 d-inline-flex justify-content-center align-items-center text-heading tw-text-xl tw-rounded-md"
+                  href="https://www.linkedin.com/in/md-nafiz-ahmed-nafiz/" target="_blank" rel="noopener noreferrer"
+                  ><i class="ph-bold ph-linkedin-logo"></i
+                ></a>
+              </li>
+              <li>
+                <a
+                  class="tw-w-13 tw-h-13 lh-1 d-inline-flex justify-content-center align-items-center text-heading tw-text-xl tw-rounded-md"
+                  href="mailto:nafizahmed000@gmail.com"
+                  ><i class="ph-bold ph-envelope"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <!-- Menu End  -->
+
+          <!-- Menu Start  -->
+          <div class="header-menu d-none">
+            <!-- Nav menu Start -->
+            <div class="main-menu">
+              <nav class="tw-main-menu-content">
+                <ul>
+                  <li><a class="color-active" href="#">Home</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#experience">Experience</a></li>
+                  <li><a href="#skills">Skills</a></li>
+                  <li><a href="#portfolio">Work</a></li>
+                  <li><a href="#achievements">Achievements</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <!-- Nav menu End  -->
+          </div>
+          <!-- Menu End  -->
+
+          <!-- Header Right start -->
+          <div class="header-right d-flex align-items-center tw-gap-705">
+            <!-- Menu Button Start  -->
+            <div class="header-three-menu">
+              <button
+                class="tw-offcanvas-open-btn tw-w-13 tw-h-13 lh-1 d-inline-flex justify-content-center align-items-center tw-transition-3 tw-rounded-md"
+              >
+                <span
+                  ><img
+                    class="tw-transition-3"
+                    src="/site/assets/images/icons/header-three-toggle.svg"
+                    alt="toggle"
+                /></span>
+              </button>
+            </div>
+            <!-- Menu Button End  -->
+
+            <!-- Header Button Start  -->
+            <div class="header-three-button d-none d-md-block">
+              <a
+                class="tw-hover-btn bg-black text-white fw-bold tw-py-4 tw-px-10 d-inline-block hover-text-white text-uppercase tw-rounded-md"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                download cv
+                <span class="tw-hover-btn-circle-dot bg-main-two-600"></span>
+              </a>
+            </div>
+            <!-- Header Button End  -->
+          </div>
+
+          <!-- Header Right End  -->
+        </nav>
+      </div>
+    </header>
+    <!-- ==================== Header End Here ==================== -->
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <section class="banner-three-area">
+          <div class="container tw-container-1800-px">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="banner-three-wrapper position-relative z-1">
+                  <!-- Below 1200px the side cards are hidden, so this carries the
+                       name + role that the left card shows on desktop. -->
+                  <div class="hero-mobile-intro d-xl-none">
+                    <span class="status-badge">
+                      <span class="dot"></span>
+                      Available for work
+                    </span>
+                    <p class="hero-mobile-name">
+                      Hi, I'm <strong>Md. Nafiz Ahmed</strong>, a software engineer &amp;
+                      <span class="accent-gradient">full-stack developer</span>.
+                    </p>
+                    <a class="hero-highlight" href="#achievements">
+                      <i class="ph-fill ph-trophy"></i>
+                      <span>KUET Datathon <strong>Champion</strong> &middot; BUET CSE Fest <strong>2nd Runner-Up</strong></span>
+                    </a>
+                  </div>
+                  <div
+                    class="banner-three-man position-absolute start-50 translate-middle-x"
+                  >
+                    <img
+                      src="/images/profile/nafiz.png"
+                      alt="Md. Nafiz Ahmed"
+                    />
+                  </div>
+                  <h1 class="banner-three-title tw-mb-30">
+                    engineer
+                  </h1>
+                  <div
+                    class="banner-three-wrap d-flex justify-content-between align-items-end position-relative z-1"
+                  >
+                    <div
+                      class="banner-three-left tw-rounded-lg"
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="200"
+                    >
+                      <span class="status-badge tw-mb-6">
+                        <span class="dot"></span>
+                        Available for work
+                      </span>
+                      <h2 class="banner-three-left-title tw-text-3xl tw-mb-6">
+                        Hello! I'm Nafiz <br />
+                        a software engineer and
+                        <span class="accent-gradient">full-stack developer.</span>
+                      </h2>
+                      <a class="hero-highlight" href="#achievements">
+                        <i class="ph-fill ph-trophy"></i>
+                        <span>KUET Datathon <strong>Champion</strong> &middot; BUET CSE Fest <strong>2nd Runner-Up</strong></span>
+                      </a>
+                      <div class="banner-three-list">
+                        <ul>
+                          <li
+                            class="tw-text-lg fw-medium d-inline-flex align-items-center tw-gap-2 tw-mb-4"
+                          >
+                            <span
+                              ><img
+                                src="/site/assets/images/icons/banner-three-pluse.svg"
+                                alt="pluse"
+                            /></span>
+                            Full-Stack Development
+                          </li>
+                          <li
+                            class="tw-text-lg fw-medium d-inline-flex align-items-center tw-gap-2 tw-mb-4"
+                          >
+                            <span
+                              ><img
+                                src="/site/assets/images/icons/banner-three-pluse.svg"
+                                alt="pluse"
+                            /></span>
+                            React & Next.js
+                          </li>
+                          <li
+                            class="tw-text-lg fw-medium d-inline-flex align-items-center tw-gap-2 tw-mb-4"
+                          >
+                            <span
+                              ><img
+                                src="/site/assets/images/icons/banner-three-pluse.svg"
+                                alt="pluse"
+                            /></span>
+                            Firebase & MongoDB
+                          </li>
+                          <li
+                            class="tw-text-lg fw-medium d-inline-flex align-items-center tw-gap-2 tw-mb-4"
+                          >
+                            <span
+                              ><img
+                                src="/site/assets/images/icons/banner-three-pluse.svg"
+                                alt="pluse"
+                            /></span>
+                            UI Engineering
+                          </li>
+                          <li
+                            class="tw-text-lg fw-medium d-inline-flex align-items-center tw-gap-2 tw-mb-4"
+                          >
+                            <span
+                              ><img
+                                src="/site/assets/images/icons/banner-three-pluse.svg"
+                                alt="pluse"
+                            /></span>
+                            Problem Solving
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div
+                      class="banner-three-center text-center"
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="200"
+                    >
+                      <h3 class="banner-three-center-title tw-text-120">
+                        Performant, robust and scalable web applications made better.
+                      </h3>
+                      <div class="banner-three-button">
+                        <a
+                          class="tw-hover-btn bg-black text-white fw-bold tw-py-4 tw-px-10 d-inline-block hover-text-white text-uppercase tw-rounded-lg"
+                          href="#portfolio"
+                        >
+                          view projects
+                          <span
+                            class="tw-hover-btn-circle-dot bg-main-two-600"
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      class="banner-three-right tw-rounded-lg"
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="300"
+                    >
+                      <div
+                        class="banner-three-counter-item tw-rounded-md tw-mb-4 position-relative"
+                      >
+                        <h4
+                          class="banner-three-counter-title tw-text-101 fw-semibold font-heading text-heading tw-mb-2 lh-1"
+                        >
+                          <span
+                            class="purecounter font-heading"
+                            data-purecounter-duration="2"
+                            data-purecounter-end="2"
+                          ></span
+                          >+
+                        </h4>
+                        <p
+                          class="banner-three-counter-paragraph tw-text-lg fw-medium text-heading"
+                        >
+                          Years Building Software
+                        </p>
+                      </div>
+                      <div
+                        class="banner-three-counter-item tw-rounded-md tw-mb-4 ms-auto bg-black"
+                      >
+                        <h4
+                          class="banner-three-counter-title tw-text-101 fw-semibold font-heading text-white tw-mb-2 lh-1"
+                        >
+                          <span
+                            class="purecounter font-heading"
+                            data-purecounter-duration="4"
+                            data-purecounter-end="10"
+                          ></span
+                          >+
+                        </h4>
+                        <p
+                          class="banner-three-counter-paragraph tw-text-lg fw-medium text-white"
+                        >
+                          Projects Shipped
+                        </p>
+                      </div>
+                      <div
+                        class="banner-three-counter-item tw-rounded-md tw-mb-4"
+                      >
+                        <h4
+                          class="banner-three-counter-title tw-text-101 fw-semibold font-heading text-heading tw-mb-2 lh-1"
+                        >
+                          <span
+                            class="purecounter font-heading"
+                            data-purecounter-duration="3"
+                            data-purecounter-end="6"
+                          ></span>
+                        </h4>
+                        <p
+                          class="banner-three-counter-paragraph tw-text-lg fw-medium text-heading"
+                        >
+                          Hackathons Entered
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="banner-three-line-shape position-absolute start-50 translate-middle-x z-n1"
+                    >
+                      <img
+                        src="/site/assets/images/shapes/banner-three-shape.png"
+                        alt="shape"
+                      />
+                      <div class="banner-three-carcel-shape">
+                        <div><span></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="about" class="about-three-area py-120 position-relative z-1">
+          <div class="container tw-container-1800-px">
+            <div class="about-three-top position-relative z-1">
+              <div class="row justify-content-center tw-mb-21">
+                <div class="col-xl-9">
+                  <div class="text-center">
+                    <h2
+                      class="about-three-title text-heading tw-text-15 tw-itm-title tw-itm-anim"
+                    >
+                      I am dedicated to building robust, scalable, and
+                      user-focused web applications. My code speaks louder
+                      than words&mdash;explore the results.
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6">
+                  <div
+                    class="about-three-thumb w-100 tw-clip-anim tw-rounded-lg"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="200"
+                  >
+                    <img
+                      class="tw-anim-img w-100 tw-rounded-lg about-portrait"
+                      data-animate="true"
+                      src="/images/profile/nafiz.jpg"
+                      alt="Md. Nafiz Ahmed"
+                    />
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div
+                    class="about-three-right"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-delay="300"
+                  >
+                    <div>
+                      <p class="tw-text-xl tw-mb-10">
+                        I&rsquo;m a Software Engineer and Computer Science
+                        student at Khulna University of Engineering &amp;
+                        Technology, passionate about building robust and
+                        scalable web applications.
+                      </p>
+                      <p class="tw-text-xl tw-mb-10">
+                        I have hands-on experience building full-stack
+                        applications with modern technologies like React,
+                        Next.js, Firebase, and MongoDB. My projects feature
+                        authentication systems, real-time updates, and highly
+                        optimized responsive layouts.
+                      </p>
+                      <p class="tw-text-xl tw-mb-10">
+                        I also worked as a QnA Teacher at Udvash Academic &amp;
+                        Admission Care for two years, which strengthened my
+                        communication and problem-solving skills. I&rsquo;m
+                        open to job opportunities and internships where I can
+                        contribute, learn, and grow.
+                      </p>
+                    </div>
+                    <div class="about-three-counter d-inline-block">
+                      <div class="tw-hover-btn-wrapper d-inline-block">
+                        <a
+                          class="tw-btn-circle tw-hover-btn-item tw-hover-btn tw-w-160-px tw-h-160-px lh-1 d-inline-flex justify-content-center align-items-center rounded-circle position-relative overflow-hidden border border-1 border-neutral-200"
+                          href="#portfolio"
+                        >
+                          <span
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <span
+                              class="tw-btn-circle-icon text-heading tw-text-8 tw-transition-3 font-heading fw-medium"
+                              >2+</span
+                            >
+                            <span
+                              class="text-heading fw-bold text-center tw-transition-3 tw-text-2xl fw-medium"
+                              >Years of Experience</span
+                            >
+                          </span>
+                          <i class="tw-btn-circle-dot bg-main-two-600"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="about-three-wrap-shape d-flex justify-content-between"
+              >
+                <div
+                  class="banner-three-counter-item tw-rounded-md position-relative"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  data-aos-delay="200"
+                >
+                  <h2
+                    class="banner-three-counter-title tw-text-101 fw-semibold font-heading text-heading tw-mb-2 lh-1"
+                  >
+                    <span
+                      class="purecounter font-heading"
+                      data-purecounter-duration="4"
+                      data-purecounter-end="10"
+                    ></span
+                    >+
+                  </h2>
+                  <p
+                    class="banner-three-counter-paragraph tw-text-lg fw-medium text-heading"
+                  >
+                    Projects Completed
+                  </p>
+                </div>
+                <div
+                  class="banner-three-counter-item tw-rounded-md position-relative"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  data-aos-delay="300"
+                >
+                  <h2
+                    class="banner-three-counter-title tw-text-101 fw-semibold font-heading text-heading tw-mb-2 lh-1"
+                  >
+                    <span
+                      class="purecounter font-heading"
+                      data-purecounter-duration="2"
+                      data-purecounter-end="6"
+                    ></span
+                    >
+                  </h2>
+                  <p
+                    class="banner-three-counter-paragraph tw-text-lg fw-medium text-heading"
+                  >
+                    Hackathons Entered
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img
+              class="about-three-shape position-absolute start-0 w-100"
+              src="/site/assets/images/shapes/about-three-shape.png"
+              alt="shape"
+            />
+          </div>
+        </section>
+        <!-- ======================== Experience start =========================== -->
+        <!-- Static rows are the fallback; the inline script at the bottom replaces
+             them with the `experience` / `education` Firestore collections. -->
+        <section id="experience" class="experience-area position-relative z-1">
+          <div class="container tw-container-1800-px">
+            <div class="experience-head" data-aos="fade-up" data-aos-duration="1000">
+              <span class="experience-kicker">Where I've worked &amp; studied</span>
+              <h2 class="experience-title">Experience</h2>
+            </div>
+            <ol id="experience-list" class="experience-list">
+              <li class="experience-row">
+                <span class="experience-date">Present</span>
+                <div class="experience-role">
+                  <h3>Prompt Engineer</h3>
+                  <a href="https://fionetix.com/" target="_blank" rel="noopener noreferrer">fionetix solutions (remote)</a>
+                </div>
+                <p class="experience-desc">Designing, optimizing, and deploying highly structured and specialized AI prompts to drive complex generative models. Engineering systematic workflows to maximize LLM accuracy and contextual generation efficiency.</p>
+              </li>
+              <li class="experience-row">
+                <span class="experience-date">January 2026 &mdash; June 2026</span>
+                <div class="experience-role">
+                  <h3>Full Stack Developer Intern</h3>
+                  <a href="https://iniastratech.com/" target="_blank" rel="noopener noreferrer">IniAstra Tech (remote)</a>
+                </div>
+                <p class="experience-desc">Contributed to the development of robust, scalable web applications utilizing modern JavaScript frameworks. Handled both frontend UI architecture and backend database integrations across a fast-paced development sprint cycle.</p>
+              </li>
+              <li class="experience-row is-education">
+                <span class="experience-date">2023 - Present</span>
+                <div class="experience-role">
+                  <h3>BSc Computer Science &amp; Engineering</h3>
+                  <span>Khulna University of Engineering &amp; Technology (KUET)</span>
+                </div>
+                <p class="experience-desc">Focusing on web development, algorithms, data structures, and software engineering. Actively building scalable projects and participating in algorithm challenges.</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+        <!-- ======================== Experience end =========================== -->
+        <!-- ======================== Marquee section start =========================== -->
+        <div class="marquee tw-pt-17 bg-black">
+          <div
+            class="marquee_left d-flex align-items-center justify-content-between tw-gap-16 overflow-hidden"
+          >
+            <div>
+              <h2
+                class="marquee-two-title marquee-three-title text-uppercase text-white"
+              >
+                Skills <span class="text-white">-</span>
+              </h2>
+            </div>
+            <div>
+              <h2
+                class="marquee-two-title marquee-three-title text-uppercase text-stroke"
+              >
+                Skills <span class="text-white">-</span>
+              </h2>
+            </div>
+            <div>
+              <h2
+                class="marquee-two-title marquee-three-title text-uppercase text-white"
+              >
+                Skills <span class="text-white">-</span>
+              </h2>
+            </div>
+            <div>
+              <h2
+                class="marquee-two-title marquee-three-title text-uppercase text-stroke"
+              >
+                Skills <span class="text-white">-</span>
+              </h2>
+            </div>
+            <div>
+              <h2
+                class="marquee-two-title marquee-three-title text-uppercase text-white"
+              >
+                Skills <span class="text-white">-</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <!-- ======================== Marquee section end =========================== -->
+        <section id="skills" class="service-three-area bg-black pt-120 tw-pb-15">
+          <div class="container tw-container-1800-px">
+            <div class="row">
+              <div class="col-12">
+                <div class="service-three-wrapper">
+                  <div
+                    class="service-three-single"
+                    data-aos="fade-right"
+                    data-aos-duration="2000"
+                    data-aos-delay="200"
+                  >
+                    <div
+                      class="service-three-item d-flex justify-content-between align-items-center"
+                    >
+                      <div class="service-three-content d-flex tw-gap-14">
+                        <div>
+                          <span
+                            class="service-three-number text-white tw-text-xl d-inline-flex align-items-center tw-gap-3 lh-1 tw-mt-5 tw-transition-3"
+                            >01
+                            <img
+                              class="tw-transition-3"
+                              src="/site/assets/images/icons/service-three-arrow.svg"
+                              alt="arrow"
+                          /></span>
+                        </div>
+                        <div>
+                          <div>
+                            <h2
+                              class="service-three-title tw-text-15 text-white tw-mb-4"
+                            >
+                              <span>Full-Stack Development</span>
+                            </h2>
+                          </div>
+                          <div class="portfolio-list portfolio-two-list">
+                            <ul class="d-flex tw-gap-205 flex-wrap">
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">React</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Next.js</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Node.js</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="service-three-thumb">
+                        <img
+                            src="/site/assets/images/thumbs/skill-fullstack.svg"
+                            alt="Full-stack development"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="service-three-single ms-auto"
+                    data-aos="fade-left"
+                    data-aos-duration="2000"
+                    data-aos-delay="300"
+                  >
+                    <div
+                      class="service-three-item d-flex justify-content-between align-items-center"
+                    >
+                      <div class="service-three-content d-flex tw-gap-14">
+                        <div>
+                          <span
+                            class="service-three-number text-white tw-text-xl d-inline-flex align-items-center tw-gap-3 lh-1 tw-mt-5 tw-transition-3"
+                            >02
+                            <img
+                              class="tw-transition-3"
+                              src="/site/assets/images/icons/service-three-arrow.svg"
+                              alt="arrow"
+                          /></span>
+                        </div>
+                        <div>
+                          <div>
+                            <h2
+                              class="service-three-title tw-text-15 text-white tw-mb-4"
+                            >
+                              <span>Backend &amp; Databases</span>
+                            </h2>
+                          </div>
+                          <div class="portfolio-list portfolio-two-list">
+                            <ul class="d-flex tw-gap-205 flex-wrap">
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Firebase</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">MongoDB</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">REST APIs</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="service-three-thumb">
+                        <img
+                            src="/site/assets/images/thumbs/skill-backend.svg"
+                            alt="Backend and databases"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="service-three-single"
+                    data-aos="fade-right"
+                    data-aos-duration="2000"
+                    data-aos-delay="400"
+                  >
+                    <div
+                      class="service-three-item d-flex justify-content-between align-items-center"
+                    >
+                      <div class="service-three-content d-flex tw-gap-14">
+                        <div>
+                          <span
+                            class="service-three-number text-white tw-text-xl d-inline-flex align-items-center tw-gap-3 lh-1 tw-mt-5 tw-transition-3"
+                            >03
+                            <img
+                              class="tw-transition-3"
+                              src="/site/assets/images/icons/service-three-arrow.svg"
+                              alt="arrow"
+                          /></span>
+                        </div>
+                        <div>
+                          <div>
+                            <h2
+                              class="service-three-title tw-text-15 text-white tw-mb-4"
+                            >
+                              <span>UI/UX &amp; Frontend</span>
+                            </h2>
+                          </div>
+                          <div class="portfolio-list portfolio-two-list">
+                            <ul class="d-flex tw-gap-205 flex-wrap">
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Tailwind CSS</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Responsive Design</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Figma</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="service-three-thumb">
+                        <img
+                            src="/site/assets/images/thumbs/skill-frontend.svg"
+                            alt="UI/UX and frontend"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="service-three-single ms-auto"
+                    data-aos="fade-left"
+                    data-aos-duration="2000"
+                    data-aos-delay="500"
+                  >
+                    <div
+                      class="service-three-item d-flex justify-content-between align-items-center"
+                    >
+                      <div class="service-three-content d-flex tw-gap-14">
+                        <div>
+                          <span
+                            class="service-three-number text-white tw-text-xl d-inline-flex align-items-center tw-gap-3 lh-1 tw-mt-5 tw-transition-3"
+                            >04
+                            <img
+                              class="tw-transition-3"
+                              src="/site/assets/images/icons/service-three-arrow.svg"
+                              alt="arrow"
+                          /></span>
+                        </div>
+                        <div>
+                          <div>
+                            <h2
+                              class="service-three-title tw-text-15 text-white tw-mb-4"
+                            >
+                              <span>Tools &amp; Practices</span>
+                            </h2>
+                          </div>
+                          <div class="portfolio-list portfolio-two-list">
+                            <ul class="d-flex tw-gap-205 flex-wrap">
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Git &amp; GitHub</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">TypeScript</span>
+                              </li>
+                              <li>
+                                <span class="skill-tag text-uppercase text-white tw-text-sm fw-medium position-relative z-1">Testing</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="service-three-thumb">
+                        <img
+                            src="/site/assets/images/thumbs/skill-tools.svg"
+                            alt="Tools and practices"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="portfolio" class="portfolio-three-area py-120 position-relative z-1">
+          <div class="portfolio-three-shape position-absolute top-0 z-n1">
+            <h3 class="portfolio-three-shape-title">works</h3>
+          </div>
+          <div class="container tw-container-1800-px">
+            <div class="row">
+              <div class="col-xl-12">
+                <div
+                  id="portfolio-three-wrapper"
+                  class="portfolio-three-wrapper d-flex justify-content-between flex-wrap align-items-start position-relative z-1"
+                >
+                  <!-- Filled by the inline script at the bottom of the page from
+                       /site/data/featured-projects.json merged with Firestore. -->
+                  <div id="portfolio-three-items" class="portfolio-grid d-flex flex-wrap justify-content-between w-100"></div>
+                  <div class="portfolio-actions w-100">
+                    <button
+                      id="projects-toggle"
+                      type="button"
+                      class="tw-hover-btn bg-black text-white fw-bold tw-py-4 tw-px-10 d-none text-uppercase tw-rounded-lg"
+                      aria-controls="portfolio-three-items"
+                      aria-expanded="false"
+                    >
+                      <span class="projects-toggle-label">show all projects</span>
+                      <span class="tw-hover-btn-circle-dot bg-main-two-600"></span>
+                    </button>
+                    <div class="about-three-counter portfolio-three-counter d-inline-block">
+                      <div class="tw-hover-btn-wrapper d-inline-block">
+                        <a
+                          class="tw-btn-circle tw-hover-btn-item tw-hover-btn tw-w-160-px tw-h-160-px lh-1 d-inline-flex justify-content-center align-items-center rounded-circle position-relative overflow-hidden"
+                          href="https://github.com/Nafiz001"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span class="d-flex flex-column justify-content-center">
+                            <span
+                              class="text-heading fw-bold tw-transition-3 tw-text-2xl fw-semibold"
+                              >More on <br />
+                              GitHub <i class="ph ph-github-logo"></i
+                            ></span>
+                          </span>
+                          <i class="tw-btn-circle-dot bg-main-two-600"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div id="achievements" class="feature-three-area py-120 position-relative z-1">
+          <div class="container tw-container-1800-px">
+            <div class="row">
+              <div class="col-xl-12">
+                <div id="feature-three-wrapper" class="feature-three-wrapper hover__widget">
+                  <div class="feature-three-single current hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="feature-three-item d-flex justify-content-between align-items-center">
+                      <div class="feature-three-left d-flex align-items-center">
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">01</span></div>
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-160-px">Hackathon Finalist</span></div>
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">2nd Runner Up &mdash; BUET CSE Fest Hackathon</span></div>
+                      </div>
+                      <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">2026</span></div>
+                    </div>
+                    <div class="hover__reveal-bg bg-img" data-background-image="/site/assets/images/thumbs/achievement-reveal.svg"></div>
+                  </div>
+                  <div class="feature-three-single hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="feature-three-item d-flex justify-content-between align-items-center">
+                      <div class="feature-three-left d-flex align-items-center">
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">02</span></div>
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-160-px">Datathon Winner</span></div>
+                        <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">Champion &mdash; KUET First Byte Datathon</span></div>
+                      </div>
+                      <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">2025</span></div>
+                    </div>
+                    <div class="hover__reveal-bg bg-img" data-background-image="/site/assets/images/thumbs/achievement-reveal.svg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+
+        <section
+          id="contact"
+          class="footer-three-area pt-120 tw-pb-10 position-relative z-1"
+        >
+          <div class="container tw-container-1800-px">
+            <div class="row justify-content-between pb-120">
+              <div class="col-xl-5 col-lg-6">
+                <div
+                  class="footer-three-top-left tw-me-25"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  data-aos-delay="200"
+                >
+                  <div class="tw-mb-9">
+                    <h2 class="tw-text-15 text-white tw-char-animation">
+                      Let’s create something meaningful
+                    </h2>
+                  </div>
+                  <div
+                    class="d-inline-flex align-items-center tw-gap-6 tw-mb-10 flex-wrap"
+                  >
+                    <a
+                      class="tw-text-2xl fw-medium text-main-600 hover-underline hover-text-white"
+                      href="mailto:nafizahmed000@gmail.com"
+                      >nafizahmed000@gmail.com</a
+                    >
+                    <span class="tw-text-2xl fw-medium text-main-600">//</span>
+                    <a
+                      class="tw-text-2xl fw-medium text-main-600 hover-underline hover-text-white"
+                      href="tel:+8801634324335"
+                      >+880 1634-324335</a
+                    >
+                  </div>
+                  <div
+                    class="footer-three-top-info tw-p-705 tw-rounded-lg d-flex tw-gap-6"
+                  >
+                    <div
+                      class="footer-three-top-content d-flex justify-content-between flex-column"
+                    >
+                      <div>
+                        <h3 class="tw-text-xl text-white tw-mb-2">
+                          Md. Nafiz Ahmed
+                        </h3>
+                        <p class="text-white">Software Engineer</p>
+                      </div>
+                      <div class="footer-three-social">
+                        <ul class="d-flex align-items-center tw-gap-1">
+                          <li>
+                            <a
+                              class="tw-w-11 tw-h-101 lh-1 d-inline-flex align-items-center justify-content-center tw-rounded-lg tw-text-xl text-heading hover-bg-main-600 hover-text-heading"
+                              href="https://web.facebook.com/nafiz.ahmed.503092" target="_blank" rel="noopener noreferrer"
+                              ><i class="ph ph-facebook-logo"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a
+                              class="tw-w-11 tw-h-101 lh-1 d-inline-flex align-items-center justify-content-center tw-rounded-lg tw-text-xl text-heading hover-bg-main-600 hover-text-heading"
+                              href="https://github.com/Nafiz001" target="_blank" rel="noopener noreferrer"
+                              ><i class="ph ph-github-logo"></i
+                            ></a>
+                          </li>
+                          <li>
+                            <a
+                              class="tw-w-11 tw-h-101 lh-1 d-inline-flex align-items-center justify-content-center tw-rounded-lg tw-text-xl text-heading hover-bg-main-600 hover-text-heading"
+                              href="https://www.linkedin.com/in/md-nafiz-ahmed-nafiz/" target="_blank" rel="noopener noreferrer"
+                              ><i class="ph ph-linkedin-logo"></i
+                            ></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6">
+                <div
+                  class="footer-three-form"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  data-aos-delay="300"
+                >
+                  <form id="contact-form" novalidate>
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <div class="position-relative tw-mb-7">
+                          <label class="visually-hidden" for="contact-name">Your name</label>
+                          <input
+                            id="contact-name"
+                            name="name"
+                            type="text"
+                            autocomplete="name"
+                            required
+                            class="form-control bg-transparent shadow-none tw-rounded-lg text-white tw-ps-7 tw-pe-13 tw-placeholder-text-neutral-100 focus-border-main-600 focus-tw-placeholder-text-hidden tw-placeholder-transition-2 tw-h-18"
+                            placeholder="Your Name"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xl-12">
+                        <div class="position-relative tw-mb-7">
+                          <label class="visually-hidden" for="contact-email">Your email</label>
+                          <input
+                            id="contact-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                            class="form-control bg-transparent shadow-none tw-rounded-lg text-white tw-ps-7 tw-pe-13 tw-placeholder-text-neutral-100 focus-border-main-600 focus-tw-placeholder-text-hidden tw-placeholder-transition-2 tw-h-18"
+                            placeholder="Email Address"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-xl-12">
+                        <div class="position-relative tw-mb-7">
+                          <label class="visually-hidden" for="contact-message">Message</label>
+                          <textarea
+                            id="contact-message"
+                            name="message"
+                            required
+                            class="form-control bg-transparent shadow-none tw-rounded-lg text-white tw-ps-7 tw-pe-13 tw-placeholder-text-neutral-100 focus-border-main-600 focus-tw-placeholder-text-hidden tw-placeholder-transition-2 tw-h-196-px"
+                            placeholder="Message"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-xl-12">
+                        <div class="contact-button">
+                          <button
+                            type="submit"
+                            class="tw-hover-btn bg-main-600 text-heading tw-text-xl fw-bold tw-py-4 tw-px-10 d-inline-flex justify-content-center w-100 hover-text-heading hover-bg-white tw-transition-3 tw-rounded-lg"
+                          >
+                            send message
+                          </button>
+                          <p class="contact-note">
+                            Opens your email app with the message ready to send.
+                            Or write directly to
+                            <a href="mailto:nafizahmed000@gmail.com">nafizahmed000@gmail.com</a>.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-three-border tw-px-18 tw-mb-10">
+            <div class="container-fluid gx-0">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div
+                    class="footer-three-middile d-flex align-items-center justify-content-between"
+                  >
+                    <div
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="200"
+                    >
+                      <h4 class="tw-text-2xl text-white tw-mb-2">
+                        Quick Links
+                      </h4>
+                      <ul class="d-flex tw-gap-2 flex-wrap">
+                        <li>
+                          <a class="tw-text-lg text-white" href="#"
+                            >Home,</a
+                          >
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#about"
+                            >About Me,
+                          </a>
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#experience"
+                            >Experience,
+                          </a>
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#skills"
+                            >Skills,
+                          </a>
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#portfolio"
+                            >Work,
+                          </a>
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#achievements"
+                            >Achievements,
+                          </a>
+                        </li>
+                        <li>
+                          <a class="tw-text-lg text-white" href="#contact"
+                            >Contact
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="300"
+                    >
+                      <a
+                        class="footer-three-back-to-top tw-w-170 tw-h-170 lh-1 d-inline-flex justify-content-center align-items-center bg-main-two-600 text-white tw-text-3xl rounded-circle"
+                        href="#"
+                        ><i class="ph ph-arrow-up"></i
+                      ></a>
+                    </div>
+                    <div
+                      class="text-lg-end"
+                      data-aos="fade-up"
+                      data-aos-duration="1000"
+                      data-aos-delay="400"
+                    >
+                      <h4 class="tw-text-2xl text-white tw-mb-2">
+                        Nafiz Ahmed Portfolio
+                      </h4>
+                      <p class="tw-text-lg text-white">
+                        &copy; 2026 Md. Nafiz Ahmed. All rights reserved
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="container tw-container-1800-px">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="footer-three-bottom text-center">
+                    <h5 class="footer-three-bottom-title text-white text-center">
+                      Nafiz
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img
+              class="position-absolute top-0 start-0 z-n1"
+              src="/site/assets/images/shapes/footer-three-bg-shape.png"
+              alt="shape"
+            />
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- Jquery js -->
+    <script src="/site/assets/js/jquery-3.7.1.min.js"></script>
+    <!-- phosphor Js -->
+    <script src="/site/assets/js/phosphor-icon.js"></script>
+    <!-- Bootstrap Bundle Js -->
+    <script src="/site/assets/js/boostrap.bundle.min.js"></script>
+    <!-- aos -->
+    <script src="/site/assets/js/aos.js"></script>
+    <!-- marquee -->
+    <script src="/site/assets/js/jquery.marquee.min.js"></script>
+    <!-- counterup js -->
+    <script src="/site/assets/js/purecounter.js"></script>
+
+    <!-- gsap js -->
+    <script src="/site/assets/js/gsap/gsap.js"></script>
+    <!-- Scroll plugin -->
+    <script src="/site/assets/js/gsap/gsap-scroll-to-plugin.js"></script>
+    <!-- Scroll smoother -->
+    <script src="/site/assets/js/gsap/gsap-scroll-smoother.js"></script>
+    <!-- Scroll Trigger -->
+    <script src="/site/assets/js/gsap/gsap-scroll-trigger.js"></script>
+    <!-- split text -->
+    <script src="/site/assets/js/gsap/gsap-split-text.js"></script>
+    <!-- chroma js -->
+    <script src="/site/assets/js/gsap/chroma.min.js"></script>
+
+    <!-- custom GSAP -->
+    <script src="/site/assets/js/slider-active.js"></script>
+    <!-- custom GSAP -->
+    <script src="/site/assets/js/custom-gsap.js"></script>
+    <!-- main js -->
+    <script src="/site/assets/js/main.js"></script>
+    <!-- cursor js -->
+    <script src="/site/assets/js/tw-cursor.js"></script>
+
+    <!-- Visual polish: scroll progress bar + pointer-tracked spotlight on skill rows -->
+    <script>
+      (function () {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll progress bar
+        var bar = document.querySelector('.scroll-progress');
+        if (bar) {
+          var ticking = false;
+          var update = function () {
+            var doc = document.documentElement;
+            var max = doc.scrollHeight - window.innerHeight;
+            var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+            bar.style.setProperty('--scroll-progress', pct.toFixed(2) + '%');
+            ticking = false;
+          };
+          window.addEventListener(
+            'scroll',
+            function () {
+              if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(update);
+              }
+            },
+            { passive: true }
+          );
+          update();
+        }
+
+        // Contact form: there's no mail backend, so hand the message to the
+        // visitor's own email client, pre-filled, instead of pretending to send.
+        var CONTACT_EMAIL = 'nafizahmed000@gmail.com';
+        function showToast(type, title, text) {
+          var container = document.getElementById('toast-container');
+          if (!container) return;
+          var toast = document.createElement('div');
+          toast.className = 'toast-message ' + type;
+          toast.setAttribute('role', 'status');
+          toast.innerHTML =
+            '<div class="toast-message__content">' +
+            '<span class="toast-message__icon"><i class="ph-fill ' +
+            (type === 'success' ? 'ph-check-circle' : 'ph-warning-circle') +
+            '"></i></span><div><h6 class="toast-message__title"></h6>' +
+            '<p class="toast-message__text"></p></div></div>' +
+            '<div class="progress__bar"></div>';
+          toast.querySelector('.toast-message__title').textContent = title;
+          toast.querySelector('.toast-message__text').textContent = text;
+          container.appendChild(toast);
+          requestAnimationFrame(function () {
+            toast.classList.add('active');
+          });
+          setTimeout(function () {
+            toast.classList.remove('active');
+            setTimeout(function () {
+              toast.remove();
+            }, 600);
+          }, 4500);
+        }
+        var form = document.getElementById('contact-form');
+        if (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            // form.elements, not form.name: HTMLFormElement.name is the form's own attribute.
+            var nameEl = form.elements.namedItem('name');
+            var emailEl = form.elements.namedItem('email');
+            var messageEl = form.elements.namedItem('message');
+            var name = nameEl.value.trim();
+            var email = emailEl.value.trim();
+            var message = messageEl.value.trim();
+            var emailOk = email && emailEl.checkValidity();
+            if (!name || !emailOk || !message) {
+              showToast('danger', 'Almost there', 'Please add your name, a valid email and a message.');
+              var firstBad = !name ? nameEl : !emailOk ? emailEl : messageEl;
+              firstBad.focus();
+              return;
+            }
+            var subject = 'Portfolio enquiry from ' + name;
+            var body = message + '\n\n— ' + name + ' (' + email + ')';
+            window.location.href =
+              'mailto:' + CONTACT_EMAIL +
+              '?subject=' + encodeURIComponent(subject) +
+              '&body=' + encodeURIComponent(body);
+            showToast('success', 'Opening your email app', 'Your message is filled in; just press send.');
+          });
+        }
+
+        // Spotlight follows the pointer across each skill row
+        if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+          document.querySelectorAll('.service-three-single').forEach(function (row) {
+            row.addEventListener('pointermove', function (e) {
+              var r = row.getBoundingClientRect();
+              row.style.setProperty('--mx', e.clientX - r.left + 'px');
+              row.style.setProperty('--my', e.clientY - r.top + 'px');
+            });
+          });
+        }
+      })();
+    </script>
+
+    <!-- Live content: pulls real projects & achievements from the same Firestore
+         project used by the React admin panel, so this static copy always shows
+         current data instead of hardcoded placeholders. -->
+    <script>
+      (function () {
+        var FIREBASE_PROJECT_ID = 'portfolio-d090a';
+        var BASE_URL = 'https://firestore.googleapis.com/v1/projects/' + FIREBASE_PROJECT_ID + '/databases/(default)/documents/';
+
+        function unwrap(value) {
+          if (!value) return undefined;
+          if ('stringValue' in value) return value.stringValue;
+          if ('integerValue' in value) return value.integerValue;
+          if ('doubleValue' in value) return value.doubleValue;
+          if ('booleanValue' in value) return value.booleanValue;
+          if ('arrayValue' in value) return (value.arrayValue.values || []).map(unwrap);
+          if ('mapValue' in value) return docToObject(value.mapValue.fields || {});
+          return undefined;
+        }
+
+        function docToObject(fields) {
+          var obj = {};
+          Object.keys(fields || {}).forEach(function (key) {
+            obj[key] = unwrap(fields[key]);
+          });
+          return obj;
+        }
+
+        function fetchCollection(name) {
+          return fetch(BASE_URL + name)
+            .then(function (res) {
+              return res.ok ? res.json() : { documents: [] };
+            })
+            .then(function (json) {
+              return (json.documents || []).map(function (d) {
+                var obj = docToObject(d.fields);
+                obj.id = d.name.split('/').pop();
+                return obj;
+              });
+            })
+            .catch(function () {
+              return [];
+            });
+        }
+
+        function esc(value) {
+          return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+          });
+        }
+
+        function isReal(url) {
+          return typeof url === 'string' && /^https?:\/\//.test(url);
+        }
+
+        // Curated projects live in the repo; Firestore (edited from /admin) can add
+        // more or override one by giving it the same title. Lower `order` first;
+        // anything without an order keeps its relative position after the rest.
+        function mergeProjects(featured, remote) {
+          var byTitle = {};
+          var list = [];
+          featured.concat(remote).forEach(function (p, i) {
+            if (!p || !p.title) return;
+            var key = p.title.trim().toLowerCase();
+            var item = Object.assign({ _i: i }, p);
+            if (key in byTitle) {
+              var prev = list[byTitle[key]];
+              list[byTitle[key]] = Object.assign({}, prev, item, { _i: prev._i });
+            } else {
+              byTitle[key] = list.length;
+              list.push(item);
+            }
+          });
+          function rank(p) {
+            return p.order != null && p.order !== '' && !isNaN(Number(p.order)) ? Number(p.order) : 1000 + p._i;
+          }
+          return list.sort(function (x, y) {
+            return rank(x) - rank(y);
+          });
+        }
+
+        var INITIAL_PROJECTS = 6;
+
+        function renderProjects(projects) {
+          var container = document.getElementById('portfolio-three-items');
+          if (!container || !projects.length) return;
+
+          function iconLink(url, icon, label) {
+            return (
+              '<a class="portfolio-three-btn tw-w-8 tw-h-8 lh-1 d-inline-flex justify-content-center align-items-center text-heading rounded-circle hover-bg-main-two-600 hover-text-white" href="' +
+              esc(url) +
+              '" target="_blank" rel="noopener noreferrer" title="' + label + '" aria-label="' + label + '">' +
+              '<i class="ph ' + icon + '"></i></a>'
+            );
+          }
+
+          container.innerHTML = projects
+            .map(function (p, i) {
+              var live = isReal(p.liveUrl) ? p.liveUrl : null;
+              var client = isReal(p.githubClient) ? p.githubClient : null;
+              var server = isReal(p.githubServer) ? p.githubServer : null;
+              var href = live || client;
+              var title = esc(p.title);
+
+              var tags = (p.tags || [])
+                .map(function (t) {
+                  return '<li><span class="text-uppercase text-heading fw-medium position-relative z-1 d-inline-block">' + esc(t) + '</span></li>';
+                })
+                .join('');
+
+              // Live demo only when one exists; otherwise the card says so and
+              // points at the source instead of a dead link.
+              var buttons = '';
+              if (live) buttons += iconLink(live, 'ph-arrow-up-right', 'Live demo of ' + title);
+              if (client) buttons += iconLink(client, 'ph-github-logo', (server ? 'Client source of ' : 'Source of ') + title + ' on GitHub');
+              if (server) buttons += iconLink(server, 'ph-hard-drives', 'Server source of ' + title + ' on GitHub');
+
+              var meta =
+                '<div class="project-meta">' +
+                (live
+                  ? '<span class="project-status is-live"><span class="dot"></span>Live</span>'
+                  : '<span class="project-status">Source only</span>') +
+                (p.event ? '<span class="project-event"><i class="ph-fill ph-trophy"></i>' + esc(p.event) + '</span>' : '') +
+                '</div>';
+
+              var titleHtml = href
+                ? '<a class="hover-text-main-two-600" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + title + '</a>'
+                : title;
+              var img =
+                '<img class="w-100 tw-rounded-lg" loading="lazy" decoding="async" src="' +
+                esc(p.image || '/site/assets/images/thumbs/project-placeholder.svg') +
+                '" alt="Screenshot of ' + title + '">';
+
+              return (
+                '<article class="portfolio-three-item tw-rounded-lg tw-mb-705 portfolio-wrapper' + (i >= INITIAL_PROJECTS ? ' is-extra' : '') + '">' +
+                '<div class="portfolio-three-wrap d-flex justify-content-between flex-wrap row-gap-2">' +
+                '<div class="portfolio-three-body tw-mb-6">' +
+                meta +
+                '<h3 class="tw-text-605 fw-medium tw-mb-2">' + titleHtml + '</h3>' +
+                (p.subtitle ? '<p class="project-subtitle">' + esc(p.subtitle) + '</p>' : '') +
+                (p.description ? '<p class="project-desc">' + esc(p.description) + '</p>' : '') +
+                '<div class="portfolio-three-list portfolio-list"><ul class="d-flex tw-gap-205 flex-wrap">' + tags + '</ul></div>' +
+                '</div>' +
+                '<div><div class="portfolio-three-button d-flex tw-gap-2 flex-wrap">' + buttons + '</div></div>' +
+                '</div>' +
+                '<div class="portfolio-thumb not-hide-cursor fw-bold mb-0 tw-rounded-lg"' + (href ? ' data-cursor="' + (live ? 'Open' : 'Code') + '"' : '') + '>' +
+                (href
+                  ? '<a class="d-block cursor-hide tw-rounded-lg" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">' + img + '</a>'
+                  : img) +
+                '</div>' +
+                '</article>'
+              );
+            })
+            .join('');
+
+          var toggle = document.getElementById('projects-toggle');
+          if (!toggle) return;
+          if (projects.length <= INITIAL_PROJECTS) {
+            toggle.classList.add('d-none');
+            return;
+          }
+          var label = toggle.querySelector('.projects-toggle-label');
+          var closedText = 'show all ' + projects.length + ' projects';
+          label.textContent = closedText;
+          toggle.classList.remove('d-none');
+          toggle.classList.add('d-inline-block');
+          toggle.onclick = function () {
+            var open = container.classList.toggle('show-all');
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            label.textContent = open ? 'show fewer' : closedText;
+            if (!open) {
+              document.getElementById('portfolio').scrollIntoView({ block: 'start' });
+            }
+            refreshScroll();
+          };
+        }
+
+        function renderAchievements(achievements) {
+          var container = document.getElementById('feature-three-wrapper');
+          if (!container || !achievements.length) return;
+
+          achievements = achievements.slice().sort(function (x, y) {
+            return String(y.year || '').localeCompare(String(x.year || ''));
+          });
+          container.innerHTML = achievements
+            .map(function (a, i) {
+              return (
+                '<div class="feature-three-single' + (i === 0 ? ' current' : '') + ' hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">' +
+                '<div class="feature-three-item d-flex justify-content-between align-items-center">' +
+                '<div class="feature-three-left d-flex align-items-center">' +
+                '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">' + String(i + 1).padStart(2, '0') + '</span></div>' +
+                '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-160-px">' + esc(a.badge) + '</span></div>' +
+                '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">' + esc(a.title) + (a.event ? ' &mdash; ' + esc(a.event) : '') + '</span></div>' +
+                '</div>' +
+                '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">' + esc(a.year) + '</span></div>' +
+                '</div>' +
+                '<div class="hover__reveal-bg bg-img" style="background-image: url(/site/assets/images/thumbs/achievement-reveal.svg);"></div>' +
+                '</div>'
+              );
+            })
+            .join('');
+        }
+
+        // The template binds hover-reveal to the rows present at load, which
+        // re-rendering replaces, so drive it from the container instead.
+        var achWrap = document.getElementById('feature-three-wrapper');
+        if (achWrap) {
+          achWrap.addEventListener('mousemove', function (e) {
+            var row = e.target.closest('.hover__reveal-item');
+            var bg = row && row.querySelector('.hover__reveal-bg');
+            if (!bg) return;
+            var r = row.getBoundingClientRect();
+            bg.style.transform = 'translate(' + (e.clientX - r.left) + 'px, ' + (e.clientY - r.top) + 'px)';
+          });
+        }
+
+        function refreshScroll() {
+          if (window.AOS && typeof window.AOS.refresh === 'function') window.AOS.refresh();
+          if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+        }
+
+        function fetchFeatured() {
+          return fetch('/site/data/featured-projects.json')
+            .then(function (res) {
+              return res.ok ? res.json() : [];
+            })
+            .catch(function () {
+              return [];
+            });
+        }
+
+        // Newest first: anything marked Present leads, then by the latest year
+        // mentioned in the date text.
+        function recency(item) {
+          var d = String(item.date || item.year || '');
+          if (/present|current|now/i.test(d)) return 9999;
+          var years = d.match(/\d{4}/g);
+          return years ? Math.max.apply(null, years.map(Number)) : 0;
+        }
+
+        function renderExperience(jobs, schools) {
+          var list = document.getElementById('experience-list');
+          if (!list || (!jobs.length && !schools.length)) return;
+          var byRecency = function (x, y) {
+            return recency(y) - recency(x);
+          };
+          var rows = jobs.slice().sort(byRecency).map(function (j) {
+            var org = isReal(j.url)
+              ? '<a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.company) + '</a>'
+              : '<span>' + esc(j.company) + '</span>';
+            return '<li class="experience-row"><span class="experience-date">' + esc(j.date) + '</span>' +
+              '<div class="experience-role"><h3>' + esc(j.title) + '</h3>' + org + '</div>' +
+              '<p class="experience-desc">' + esc(j.description) + '</p></li>';
+          });
+          schools.slice().sort(byRecency).forEach(function (e) {
+            rows.push('<li class="experience-row is-education"><span class="experience-date">' + esc(e.date || e.year) + '</span>' +
+              '<div class="experience-role"><h3>' + esc(e.degree) + '</h3><span>' + esc(e.institution) + '</span></div>' +
+              '<p class="experience-desc">' + esc(e.description) + '</p></li>');
+          });
+          list.innerHTML = rows.join('');
+        }
+
+        Promise.all([
+          fetchFeatured(),
+          fetchCollection('projects'),
+          fetchCollection('achievements'),
+          fetchCollection('experience'),
+          fetchCollection('education'),
+        ]).then(function (results) {
+          renderProjects(mergeProjects(results[0], results[1]));
+          renderAchievements(results[2]);
+          renderExperience(results[3], results[4]);
+          refreshScroll();
+        });
+      })();
+    </script>
+  </body>
+</html>
