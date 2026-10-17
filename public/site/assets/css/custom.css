@@ -714,3 +714,134 @@ textarea:focus-visible {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* --- Clip-reveal images ----------------------------------------------------
+   custom-gsap.js (08) paints these images through nine mask layers and keeps
+   the real <img> at opacity 0. When it skips the effect (the visitor asked for
+   reduced motion, or the script never ran) there are no masks, and the image
+   has to show itself, or the About section's left half stays empty. */
+.tw-clip-anim:not(:has(.mask)) .tw-anim-img {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tw-clip-anim .tw-anim-img {
+    opacity: 1;
+  }
+}
+
+/* --- Projects as stacking cards -------------------------------------------
+   One wide card per project, text beside the screenshot, so the section has
+   no empty half. On wide screens the inline script pins each card below the
+   header while the next slides over it; elsewhere they are a plain list. */
+.portfolio-grid.is-stack {
+  display: block !important;
+  padding-block-end: 0;
+}
+
+.portfolio-grid .project-card,
+.portfolio-grid .project-card:nth-child(even) {
+  max-width: none;
+  width: 100%;
+  margin: 0 0 48px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  translate: none;
+}
+
+.portfolio-grid .project-card:hover {
+  transform: none;
+}
+
+.project-card-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: center;
+  padding: 40px;
+  background: #f5f5f5;
+  /* The upward shadow falls on the card underneath, so each layer of the
+     stack reads as its own sheet rather than one tall grey card. */
+  box-shadow:
+    0 -14px 28px -18px rgba(0, 0, 0, 0.32),
+    0 -1px 0 0 rgba(0, 0, 0, 0.06),
+    0 30px 60px -32px rgba(0, 0, 0, 0.45),
+    0 4px 4px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+  transform-origin: 50% 0;
+}
+
+/* Darkens a card as the next one covers it (animated by the inline script). */
+.project-card-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-card-body .portfolio-three-wrap {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.project-card .portfolio-three-body {
+  flex: none;
+  width: 100%;
+}
+
+.project-card .project-desc {
+  max-width: none;
+}
+
+.project-card .portfolio-thumb img {
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1199px) {
+  .project-card-inner {
+    gap: 32px;
+    padding: 32px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .project-card-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .project-card .portfolio-thumb {
+    order: -1;
+  }
+
+  .portfolio-grid .project-card,
+  .portfolio-grid .project-card:nth-child(even) {
+    margin-block-end: 28px;
+  }
+}
+
+/* With reduced motion the cards still stack, but as plain layout: each one
+   sticks below the header as the next scrolls over it, with no scaling or
+   shading. This works there because ScrollSmoother is off; its transform is
+   what rules sticky out in the animated version.
+   overflow-x: hidden on <body> quietly makes it a scroll container, and
+   sticky would then stick to the body, which never scrolls. clip hides the
+   same overflow without that. */
+@media (prefers-reduced-motion: reduce) and (min-width: 992px) {
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  .portfolio-grid.is-stack .project-card {
+    position: sticky;
+    top: calc(110px + var(--stack-i, 0) * 14px);
+  }
+}

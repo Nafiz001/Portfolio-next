@@ -1634,8 +1634,15 @@
                 esc(p.image || '/site/assets/images/thumbs/project-placeholder.svg') +
                 '" alt="Screenshot of ' + title + '">';
 
+              // The article is what pins while the cards stack; the inner
+              // card carries the background and is what sinks back, so the
+              // pin's transform and the sinking scale never fight. --stack-i
+              // is its place in the stack for the CSS sticky version.
               return (
-                '<article class="portfolio-three-item tw-rounded-lg tw-mb-705 portfolio-wrapper' + (i >= INITIAL_PROJECTS ? ' is-extra' : '') + '">' +
+                '<article class="portfolio-three-item project-card' + (i >= INITIAL_PROJECTS ? ' is-extra' : '') + '" style="--stack-i:' + i + '">' +
+                '<div class="project-card-inner tw-rounded-lg">' +
+                '<div class="project-card-shade" aria-hidden="true"></div>' +
+                '<div class="project-card-body">' +
                 '<div class="portfolio-three-wrap d-flex justify-content-between flex-wrap row-gap-2">' +
                 '<div class="portfolio-three-body tw-mb-6">' +
                 meta +
@@ -1646,15 +1653,20 @@
                 '</div>' +
                 '<div><div class="portfolio-three-button d-flex tw-gap-2 flex-wrap">' + buttons + '</div></div>' +
                 '</div>' +
+                '</div>' +
                 '<div class="portfolio-thumb not-hide-cursor fw-bold mb-0 tw-rounded-lg"' + (href ? ' data-cursor="' + (live ? 'Open' : 'Code') + '"' : '') + '>' +
                 (href
                   ? '<a class="d-block cursor-hide tw-rounded-lg" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">' + img + '</a>'
                   : img) +
                 '</div>' +
+                '</div>' +
                 '</article>'
               );
             })
             .join('');
+
+          container.classList.add('is-stack');
+          buildStack();
 
           var toggle = document.getElementById('projects-toggle');
           if (!toggle) return;
@@ -1674,9 +1686,100 @@
             if (!open) {
               document.getElementById('portfolio').scrollIntoView({ block: 'start' });
             }
-            refreshScroll();
+            // More (or fewer) cards to stack: rebuild once the layout settles.
+            requestAnimationFrame(function () {
+              buildStack();
+              refreshScroll();
+            });
           };
         }
+
+        // Stacking cards: each project pins below the header while the next
+        // one slides up over it, and the card underneath sinks back a little.
+        // GSAP pins rather than CSS sticky, because ScrollSmoother moves the
+        // page with a transform, which sticky does not survive. With reduced
+        // motion there is no ScrollSmoother, so custom.css stacks the cards
+        // with plain position: sticky instead, and nothing animates. Narrow
+        // screens get a plain list.
+        var stack = [];
+        var STACK_TOP = 110; // below the header
+        var STACK_STEP = 14; // each card sits a little lower than the last
+
+        function buildStack() {
+          stack.forEach(function (s) {
+            s.kill();
+          });
+          stack = [];
+          var g = window.gsap;
+          var ST = window.ScrollTrigger;
+          var inners = document.querySelectorAll('#portfolio-three-items .project-card-inner, #portfolio-three-items .project-card-shade');
+          if (g) g.set(inners, { clearProps: 'transform,opacity' });
+          if (!g || !ST) return;
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          if (!window.matchMedia('(min-width: 992px)').matches) return;
+
+          var cards = Array.prototype.filter.call(
+            document.querySelectorAll('#portfolio-three-items .project-card'),
+            function (c) {
+              return c.offsetParent !== null;
+            }
+          );
+          if (cards.length < 2) return;
+          var last = cards[cards.length - 1];
+          var lastTop = STACK_TOP + (cards.length - 1) * STACK_STEP;
+
+          cards.forEach(function (card, i) {
+            var top = STACK_TOP + i * STACK_STEP;
+            stack.push(
+              ST.create({
+                trigger: card,
+                start: 'top ' + top + 'px',
+                endTrigger: last,
+                end: 'top ' + lastTop + 'px',
+                pin: true,
+                pinSpacing: false,
+              })
+            );
+            var next = cards[i + 1];
+            if (!next) return;
+            // Scale and a fading shade, not a CSS filter: a filter on a
+            // card this size repaints every frame and can flash black.
+            var sink = g
+              .timeline({
+                scrollTrigger: {
+                  trigger: next,
+                  start: 'top bottom',
+                  end: 'top ' + (top + STACK_STEP) + 'px',
+                  scrub: true,
+                },
+              })
+              .to(card.querySelector('.project-card-inner'), { scale: 0.94, ease: 'none' }, 0)
+              .to(card.querySelector('.project-card-shade'), { opacity: 0.16, ease: 'none' }, 0);
+            stack.push(sink.scrollTrigger, sink);
+          });
+          ST.refresh();
+        }
+
+        // Crossing 992px switches between the stack and the plain list.
+        var stackWide = window.matchMedia('(min-width: 992px)');
+        if (stackWide.addEventListener) stackWide.addEventListener('change', buildStack);
+
+        // ScrollTrigger measures the page once. Images that arrive later (the
+        // About portrait, lazy screenshots) make it taller, and every pin and
+        // reveal below them would then fire in the wrong place, so measure
+        // again whenever one finishes loading.
+        var remeasure = null;
+        document.addEventListener(
+          'load',
+          function (e) {
+            if (!e.target || e.target.tagName !== 'IMG' || !window.ScrollTrigger) return;
+            clearTimeout(remeasure);
+            remeasure = setTimeout(function () {
+              window.ScrollTrigger.refresh();
+            }, 150);
+          },
+          true
+        );
 
         function renderAchievements(achievements) {
           var container = document.getElementById('feature-three-wrapper');
