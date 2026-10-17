@@ -756,10 +756,18 @@
               <li class="experience-row">
                 <span class="experience-date">Present</span>
                 <div class="experience-role">
+                  <h3>Full Stack Developer</h3>
+                  <a href="https://enginefinders.co.uk/" target="_blank" rel="noopener noreferrer">EngineFinders (UK, remote)</a>
+                </div>
+                <p class="experience-desc">Building and maintaining the company's garage, engine, car and number plate maker sites across the front end, back end and database, for customers across the UK.</p>
+              </li>
+              <li class="experience-row">
+                <span class="experience-date">2026</span>
+                <div class="experience-role">
                   <h3>Prompt Engineer</h3>
                   <a href="https://fionetix.com/" target="_blank" rel="noopener noreferrer">fionetix solutions (remote)</a>
                 </div>
-                <p class="experience-desc">Designing, optimizing, and deploying highly structured and specialized AI prompts to drive complex generative models. Engineering systematic workflows to maximize LLM accuracy and contextual generation efficiency.</p>
+                <p class="experience-desc">Designed, optimized and deployed structured AI prompts for generative models, and engineered systematic workflows to improve LLM accuracy and consistency.</p>
               </li>
               <li class="experience-row">
                 <span class="experience-date">January 2026 &mdash; June 2026</span>
@@ -1800,6 +1808,28 @@
           if (window.ScrollTrigger) window.ScrollTrigger.refresh();
         }
 
+        // Jobs kept in the repo win over the Firestore document with the same id,
+        // so a stale admin entry can't put a past job back at "Present".
+        function mergeJobs(local, remote) {
+          var byId = {};
+          remote.concat(local).forEach(function (j) {
+            if (j && j.title) byId[j.id || j.title] = Object.assign({}, byId[j.id || j.title], j);
+          });
+          return Object.keys(byId).map(function (k) {
+            return byId[k];
+          });
+        }
+
+        function fetchJson(url) {
+          return fetch(url)
+            .then(function (res) {
+              return res.ok ? res.json() : [];
+            })
+            .catch(function () {
+              return [];
+            });
+        }
+
         function fetchFeatured() {
           return fetch('/site/data/featured-projects.json')
             .then(function (res) {
@@ -1847,10 +1877,11 @@
           fetchCollection('achievements'),
           fetchCollection('experience'),
           fetchCollection('education'),
+          fetchJson('/site/data/experience.json'),
         ]).then(function (results) {
           renderProjects(mergeProjects(results[0], results[1]));
           renderAchievements(results[2]);
-          renderExperience(results[3], results[4]);
+          renderExperience(mergeJobs(results[5], results[3]), results[4]);
           refreshScroll();
         });
       })();

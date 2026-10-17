@@ -162,12 +162,20 @@ export default function AdminPage() {
       // --- EXPERIENCE ---
       const expData = [
         {
+          id: 'exp0',
+          title: 'Full Stack Developer',
+          company: 'EngineFinders (UK, remote)',
+          date: 'Present',
+          url: 'https://enginefinders.co.uk/',
+          description: "Building and maintaining the company's garage, engine, car and number plate maker sites across the front end, back end and database, for customers across the UK."
+        },
+        {
           id: 'exp1',
           title: 'Prompt Engineer',
           company: 'fionetix solutions (remote)',
-          date: 'Present',
+          date: '2026',
           url: 'https://fionetix.com/',
-          description: 'Designing, optimizing, and deploying highly structured and specialized AI prompts to drive complex generative models. Engineering systematic workflows to maximize LLM accuracy and contextual generation efficiency.'
+          description: 'Designed, optimized and deployed structured AI prompts for generative models, and engineered systematic workflows to improve LLM accuracy and consistency.'
         },
         {
           id: 'exp2',
