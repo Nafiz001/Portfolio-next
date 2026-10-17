@@ -840,8 +840,73 @@ textarea:focus-visible {
     overflow-x: clip;
   }
 
-  .portfolio-grid.is-stack .project-card {
+  .project-stack .project-card {
     position: sticky;
     top: calc(110px + var(--stack-i, 0) * 14px);
+  }
+}
+
+/* AOS hides every [data-aos] element until it reveals it. With reduced
+   motion it is initialised with disable: true, which only strips the
+   attribute from elements present at start-up; rows rendered later from
+   Firestore (the achievements list) kept it and stayed invisible, leaving
+   that dark section empty. Show them as they are. */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* The animated stack: the cards lie on top of each other in a stage as tall
+   as the window below the header, pinned while the inline script's timeline
+   slides each one up over the last. */
+.project-stack.is-pinned {
+  position: relative;
+  height: calc(100vh - 120px);
+}
+
+.project-stack.is-pinned .project-card {
+  position: absolute;
+  inset: 0 0 auto;
+  margin: 0;
+}
+
+/* "Show all": the rest of the projects as a grid of compact cards under the
+   stack, screenshot on top. */
+.project-more {
+  display: none;
+}
+
+.portfolio-grid.show-all .project-more {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-block-start: 56px;
+}
+
+.project-more .project-card,
+.project-more .project-card:nth-child(even) {
+  margin: 0;
+}
+
+.project-more .project-card-inner {
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 24px;
+  height: 100%;
+  padding: 28px;
+}
+
+.project-more .portfolio-thumb {
+  order: -1;
+}
+
+@media screen and (max-width: 991px) {
+  .portfolio-grid.show-all .project-more {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-block-start: 28px;
   }
 }

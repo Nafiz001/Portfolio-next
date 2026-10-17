@@ -411,6 +411,8 @@
                   >
                     <img
                       src="/images/profile/nafiz-cutout.webp"
+                      width="433"
+                      height="576"
                       alt="Md. Nafiz Ahmed"
                     />
                   </div>
@@ -623,6 +625,8 @@
                       class="tw-anim-img w-100 tw-rounded-lg about-portrait"
                       data-animate="true"
                       src="/images/profile/nafiz.webp"
+                      width="1800"
+                      height="2390"
                       alt="Md. Nafiz Ahmed"
                     />
                   </div>
@@ -1089,7 +1093,7 @@
             <div class="row">
               <div class="col-xl-12">
                 <div id="feature-three-wrapper" class="feature-three-wrapper hover__widget">
-                  <div class="feature-three-single current hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                  <div class="feature-three-single current" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="feature-three-item d-flex justify-content-between align-items-center">
                       <div class="feature-three-left d-flex align-items-center">
                         <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">01</span></div>
@@ -1098,9 +1102,8 @@
                       </div>
                       <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">2026</span></div>
                     </div>
-                    <div class="hover__reveal-bg bg-img" data-background-image="/site/assets/images/thumbs/achievement-reveal.svg"></div>
                   </div>
-                  <div class="feature-three-single hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                  <div class="feature-three-single" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="feature-three-item d-flex justify-content-between align-items-center">
                       <div class="feature-three-left d-flex align-items-center">
                         <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">02</span></div>
@@ -1109,7 +1112,6 @@
                       </div>
                       <div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">2025</span></div>
                     </div>
-                    <div class="hover__reveal-bg bg-img" data-background-image="/site/assets/images/thumbs/achievement-reveal.svg"></div>
                   </div>
                 </div>
               </div>
@@ -1597,7 +1599,7 @@
             );
           }
 
-          container.innerHTML = projects
+          var cardsHtml = projects
             .map(function (p, i) {
               var live = isReal(p.liveUrl) ? p.liveUrl : null;
               var client = isReal(p.githubClient) ? p.githubClient : null;
@@ -1662,9 +1664,14 @@
                 '</div>' +
                 '</article>'
               );
-            })
-            .join('');
+            });
 
+          // The first few stack; the rest wait behind "show all" in a grid,
+          // because stacking every project would mean a very long scroll.
+          var more = cardsHtml.slice(INITIAL_PROJECTS).join('');
+          container.innerHTML =
+            '<div class="project-stack">' + cardsHtml.slice(0, INITIAL_PROJECTS).join('') + '</div>' +
+            (more ? '<div class="project-more">' + more + '</div>' : '');
           container.classList.add('is-stack');
           buildStack();
 
@@ -1686,100 +1693,82 @@
             if (!open) {
               document.getElementById('portfolio').scrollIntoView({ block: 'start' });
             }
-            // More (or fewer) cards to stack: rebuild once the layout settles.
-            requestAnimationFrame(function () {
-              buildStack();
-              refreshScroll();
-            });
+            // The grid below the stack changed height: re-measure what follows.
+            requestAnimationFrame(refreshScroll);
           };
         }
 
-        // Stacking cards: each project pins below the header while the next
-        // one slides up over it, and the card underneath sinks back a little.
-        // GSAP pins rather than CSS sticky, because ScrollSmoother moves the
-        // page with a transform, which sticky does not survive. With reduced
-        // motion there is no ScrollSmoother, so custom.css stacks the cards
-        // with plain position: sticky instead, and nothing animates. Narrow
-        // screens get a plain list.
-        var stack = [];
-        var STACK_TOP = 110; // below the header
-        var STACK_STEP = 14; // each card sits a little lower than the last
+        // Stacking cards. The stack is pinned below the header and one
+        // scrubbed timeline brings each card up over the last while the one
+        // beneath sinks back, so scrolling up plays it backwards and the cards
+        // come off again in order. scrub eases the cards a moment behind the
+        // wheel, and a gentle snap settles on whole cards. GSAP pins rather
+        // than CSS sticky because ScrollSmoother moves the page with a
+        // transform. With reduced motion there is no ScrollSmoother and
+        // custom.css stacks the cards with plain sticky, nothing animating;
+        // narrow screens get a plain list.
+        var stackTl = null;
+        var STACK_TOP = 96; // below the header
+        var STACK_STEP = 14; // each card peeks out a little below the last
+        var STACK_SCROLL = 0.9; // viewport heights of scrolling per card
 
         function buildStack() {
-          stack.forEach(function (s) {
-            s.kill();
-          });
-          stack = [];
           var g = window.gsap;
           var ST = window.ScrollTrigger;
-          var inners = document.querySelectorAll('#portfolio-three-items .project-card-inner, #portfolio-three-items .project-card-shade');
-          if (g) g.set(inners, { clearProps: 'transform,opacity' });
-          if (!g || !ST) return;
+          var stage = document.querySelector('#portfolio-three-items .project-stack');
+          if (stackTl) {
+            if (stackTl.scrollTrigger) stackTl.scrollTrigger.kill(true);
+            stackTl.kill();
+            stackTl = null;
+          }
+          if (!stage || !g || !ST) return;
+          var cards = stage.querySelectorAll('.project-card');
+          g.set(stage.querySelectorAll('.project-card, .project-card-inner, .project-card-shade'), {
+            clearProps: 'transform,opacity',
+          });
+          stage.classList.remove('is-pinned');
           if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
           if (!window.matchMedia('(min-width: 992px)').matches) return;
-
-          var cards = Array.prototype.filter.call(
-            document.querySelectorAll('#portfolio-three-items .project-card'),
-            function (c) {
-              return c.offsetParent !== null;
-            }
-          );
           if (cards.length < 2) return;
-          var last = cards[cards.length - 1];
-          var lastTop = STACK_TOP + (cards.length - 1) * STACK_STEP;
 
-          cards.forEach(function (card, i) {
-            var top = STACK_TOP + i * STACK_STEP;
-            stack.push(
-              ST.create({
-                trigger: card,
-                start: 'top ' + top + 'px',
-                endTrigger: last,
-                end: 'top ' + lastTop + 'px',
-                pin: true,
-                pinSpacing: false,
-              })
-            );
-            var next = cards[i + 1];
-            if (!next) return;
-            // Scale and a fading shade, not a CSS filter: a filter on a
-            // card this size repaints every frame and can flash black.
-            var sink = g
-              .timeline({
-                scrollTrigger: {
-                  trigger: next,
-                  start: 'top bottom',
-                  end: 'top ' + (top + STACK_STEP) + 'px',
-                  scrub: true,
-                },
-              })
-              .to(card.querySelector('.project-card-inner'), { scale: 0.94, ease: 'none' }, 0)
-              .to(card.querySelector('.project-card-shade'), { opacity: 0.16, ease: 'none' }, 0);
-            stack.push(sink.scrollTrigger, sink);
+          stage.classList.add('is-pinned');
+          var steps = cards.length - 1;
+          stackTl = g.timeline({
+            defaults: { ease: 'none' },
+            scrollTrigger: {
+              trigger: stage,
+              start: 'top ' + STACK_TOP + 'px',
+              end: function () {
+                return '+=' + Math.round(steps * window.innerHeight * STACK_SCROLL);
+              },
+              pin: true,
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+              snap: {
+                snapTo: 1 / steps,
+                duration: { min: 0.25, max: 0.6 },
+                delay: 0.12,
+                ease: 'power2.inOut',
+              },
+            },
           });
+          for (var i = 1; i < cards.length; i++) {
+            stackTl
+              .fromTo(
+                cards[i],
+                { y: function () { return window.innerHeight; } },
+                { y: i * STACK_STEP },
+                i - 1
+              )
+              .to(cards[i - 1].querySelector('.project-card-inner'), { scale: 0.94 }, i - 1)
+              .to(cards[i - 1].querySelector('.project-card-shade'), { opacity: 0.16 }, i - 1);
+          }
           ST.refresh();
         }
 
         // Crossing 992px switches between the stack and the plain list.
         var stackWide = window.matchMedia('(min-width: 992px)');
         if (stackWide.addEventListener) stackWide.addEventListener('change', buildStack);
-
-        // ScrollTrigger measures the page once. Images that arrive later (the
-        // About portrait, lazy screenshots) make it taller, and every pin and
-        // reveal below them would then fire in the wrong place, so measure
-        // again whenever one finishes loading.
-        var remeasure = null;
-        document.addEventListener(
-          'load',
-          function (e) {
-            if (!e.target || e.target.tagName !== 'IMG' || !window.ScrollTrigger) return;
-            clearTimeout(remeasure);
-            remeasure = setTimeout(function () {
-              window.ScrollTrigger.refresh();
-            }, 150);
-          },
-          true
-        );
 
         function renderAchievements(achievements) {
           var container = document.getElementById('feature-three-wrapper');
@@ -1791,7 +1780,7 @@
           container.innerHTML = achievements
             .map(function (a, i) {
               return (
-                '<div class="feature-three-single' + (i === 0 ? ' current' : '') + ' hover__reveal-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">' +
+                '<div class="feature-three-single' + (i === 0 ? ' current' : '') + '" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">' +
                 '<div class="feature-three-item d-flex justify-content-between align-items-center">' +
                 '<div class="feature-three-left d-flex align-items-center">' +
                 '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block tw-w-20">' + String(i + 1).padStart(2, '0') + '</span></div>' +
@@ -1800,24 +1789,10 @@
                 '</div>' +
                 '<div><span class="feature-three-text tw-text-605 fw-medium text-white tw-transition-3 d-inline-block">' + esc(a.year) + '</span></div>' +
                 '</div>' +
-                '<div class="hover__reveal-bg bg-img" style="background-image: url(/site/assets/images/thumbs/achievement-reveal.svg);"></div>' +
                 '</div>'
               );
             })
             .join('');
-        }
-
-        // The template binds hover-reveal to the rows present at load, which
-        // re-rendering replaces, so drive it from the container instead.
-        var achWrap = document.getElementById('feature-three-wrapper');
-        if (achWrap) {
-          achWrap.addEventListener('mousemove', function (e) {
-            var row = e.target.closest('.hover__reveal-item');
-            var bg = row && row.querySelector('.hover__reveal-bg');
-            if (!bg) return;
-            var r = row.getBoundingClientRect();
-            bg.style.transform = 'translate(' + (e.clientX - r.left) + 'px, ' + (e.clientY - r.top) + 'px)';
-          });
         }
 
         function refreshScroll() {
