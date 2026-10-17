@@ -1,7 +1,23 @@
 [
   {
-    "id": "f1-vantage",
+    "id": "f4-vernissage",
     "order": 1,
+    "title": "Vernissage",
+    "subtitle": "Multiplayer 3D art exhibitions",
+    "description": "Curate your own exhibition from 8,263 public-domain works from The Met and the Cleveland Museum of Art, then walk through it in 3D with whoever opens the link: a Go API and WebSocket hub on Oracle Cloud behind a Next.js front end.",
+    "image": "/images/projects/vernissage.jpg",
+    "liveUrl": "https://vernissage-pi.vercel.app",
+    "githubClient": "https://github.com/Nafiz001/vernissage",
+    "tags": [
+      "Go",
+      "PostgreSQL",
+      "Next.js",
+      "React Three Fiber"
+    ]
+  },
+  {
+    "id": "f1-vantage",
+    "order": 2,
     "title": "Vantage · Robot Arm Suite",
     "subtitle": "6-DOF arm simulation & control",
     "event": "Techathon Nationals 2026",
@@ -17,24 +33,24 @@
     ]
   },
   {
-    "id": "f2-codoctor",
-    "order": 2,
-    "title": "CoDoctor",
-    "subtitle": "Bangla clinical co-pilot",
-    "event": "SciBlitz AI Challenge 2026",
-    "description": "Two phones listen to a Bangla consultation and fuse one transcript; a LangGraph agent team cites clinical guidelines while deterministic rule engines, never the LLM, catch danger signs and drug interactions.",
-    "image": "/images/projects/codoctor.jpg",
-    "githubClient": "https://github.com/Nafiz001/codoctor",
+    "id": "f10-ryoiki-tenkai",
+    "order": 3,
+    "title": "Ryōiki Tenkai · 領域展開",
+    "subtitle": "Interactive Domain Expansions",
+    "description": "Jujutsu Kaisen's Domain Expansions as a 2.5D portal depth tunnel, a domain clash simulator and a code-split three.js realm, with manga impact frames and a soundtrack synthesized in the Web Audio API.",
+    "image": "/images/projects/ryoiki-tenkai.jpg",
+    "liveUrl": "https://jjk-domain-expansion.vercel.app",
+    "githubClient": "https://github.com/Nafiz001/jjk-domain-expansion",
     "tags": [
-      "Next.js",
-      "FastAPI",
-      "LangGraph",
-      "Azure"
+      "TypeScript",
+      "Canvas 2D",
+      "Three.js",
+      "Web Audio"
     ]
   },
   {
     "id": "f7-ghostline",
-    "order": 3,
+    "order": 4,
     "title": "Ghostline",
     "subtitle": "Low-poly hover racer",
     "description": "Race your own best lap: a deterministic, hash-verified physics sim replays ghosts from input logs, so any lap can be shared as a URL. Procedural GLSL sky and track shaders, 35 tests over the sim core.",
@@ -49,39 +65,40 @@
     ]
   },
   {
-    "id": "f3-warehouse",
-    "order": 4,
-    "title": "Logarithm Warehouse",
-    "subtitle": "Resilient microservices platform",
-    "event": "BUET CSE Fest 2026 Hackathon",
-    "description": "A fragile e-commerce monolith rebuilt as Order and Inventory services with Redis-backed deterministic chaos testing across scaled replicas, Nginx load balancing, Prometheus/Grafana and CI/CD to Azure.",
-    "image": "/images/projects/warehouse.jpg",
-    "githubClient": "https://github.com/Nafiz001/logarithm-warehouse",
+    "id": "f11-ebru",
+    "order": 5,
+    "title": "ebru",
+    "subtitle": "A shared marbling tray",
+    "description": "Turkish paper marbling that anyone can work in at once: the same Rust marbling maths runs on the server and, compiled to WebAssembly, in the browser, bit for bit, with prints saved to a shared gallery.",
+    "image": "/images/projects/ebru.jpg",
+    "liveUrl": "https://ebru.130-210-16-198.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/ebru",
     "tags": [
-      "Microservices",
-      "Docker",
-      "Redis",
-      "Grafana"
+      "Rust",
+      "WebAssembly",
+      "WebSockets",
+      "Vue"
     ]
   },
   {
-    "id": "f4-vernissage",
-    "order": 5,
-    "title": "Vernissage",
-    "subtitle": "Multiplayer 3D art exhibitions",
-    "description": "Curate your own exhibition from 8,000+ public-domain works from The Met and the Cleveland Museum of Art, then walk through it in 3D with friends: a Go API and WebSocket hub behind a Next.js front end.",
-    "image": "/images/projects/vernissage.jpg",
-    "githubClient": "https://github.com/Nafiz001/vernissage",
+    "id": "f12-kirie",
+    "order": 6,
+    "title": "kirie",
+    "subtitle": "A pop-up book of the sky",
+    "description": "A paper pop-up book of the sky over 36 places, lit by the live weather there and the real sun and moon, with readers seeing each other's paper cranes in real time.",
+    "image": "/images/projects/kirie.jpg",
+    "liveUrl": "https://kirie.130-210-16-198.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/kirie",
     "tags": [
-      "Go",
-      "PostgreSQL",
-      "Next.js",
-      "React Three Fiber"
+      "ASP.NET Core",
+      "SignalR",
+      "SvelteKit",
+      "CSS 3D"
     ]
   },
   {
     "id": "f8-swarmlight",
-    "order": 6,
+    "order": 7,
     "title": "Swarmlight",
     "subtitle": "Canvas survivors-like",
     "description": "1,500 enemies at 60 fps on a single canvas with zero dependencies: spatial hashing, a boot-time sprite atlas and pooled typed arrays so the garbage collector never drops a frame.",
@@ -96,40 +113,56 @@
     ]
   },
   {
-    "id": "f5-visionbridge",
-    "order": 7,
-    "title": "VisionBridge",
-    "subtitle": "AI audio descriptions for blind learners",
-    "event": "Build with Gemma Hackathon",
-    "description": "Watches YouTube tutorials alongside blind and low-vision learners, decides when the screen actually matters, and speaks a short Gemma-written description in the narrator's natural pauses.",
-    "image": "/images/projects/visionbridge.jpg",
-    "githubClient": "https://github.com/Nafiz001/VisionBridge",
+    "id": "f13-asterism",
+    "order": 8,
+    "title": "Asterism",
+    "subtitle": "AR stargazing app",
+    "description": "Hold your phone to the sky and it names what you see: stars, planets and the ISS, drawn on the UI thread with Skia, plus a forecast of whether tonight is worth going out. The link is its web version.",
+    "image": "/images/projects/asterism.jpg",
+    "liveUrl": "https://asterism.130-210-16-198.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/asterism",
     "tags": [
-      "Gemma 4",
-      "Whisper",
-      "JavaScript",
-      "Accessibility"
+      "React Native",
+      "Expo",
+      "Skia",
+      "Astronomy"
     ]
   },
   {
-    "id": "f6-takaflow",
-    "order": 8,
-    "title": "TakaFlow",
-    "subtitle": "Money movement platform",
-    "event": "PSTU IT Carnival 2026 Hackathon",
-    "description": "A digital wallet to send, request, split and schedule money on a double-entry ledger that always adds up: idempotent transfers, three API replicas behind Nginx, PgBouncer and a monthly-partitioned Postgres.",
-    "image": "/images/projects/takaflow.jpg",
-    "githubClient": "https://github.com/Nafiz001/pstu_hackathon",
+    "id": "f14-lumen",
+    "order": 9,
+    "title": "lumen",
+    "subtitle": "A search engine from scratch",
+    "description": "A crawler, inverted index, BM25 ranking and snippets written with nothing but Go's standard library, live here searching the 400 pages of the Go blog it crawled.",
+    "image": "/images/projects/lumen.jpg",
+    "liveUrl": "https://lumen.130-210-16-198.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/lumen",
     "tags": [
-      "TypeScript",
-      "PostgreSQL",
-      "Redis",
-      "Nginx"
+      "Go",
+      "Search",
+      "BM25",
+      "Web crawler"
+    ]
+  },
+  {
+    "id": "f15-gedis",
+    "order": 10,
+    "title": "gedis",
+    "subtitle": "Redis, from scratch",
+    "description": "A Redis-compatible in-memory store that speaks RESP, so the official redis-cli talks to it, with replication, AOF persistence and eviction. A public, fenced-off instance takes connections on port 6380.",
+    "image": "/images/projects/gedis.jpg",
+    "liveUrl": "https://gedis.130-210-16-198.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/gedis",
+    "tags": [
+      "Go",
+      "RESP",
+      "Replication",
+      "Databases"
     ]
   },
   {
     "id": "f9-shopcircuit",
-    "order": 9,
+    "order": 11,
     "title": "ShopCircuit",
     "subtitle": "E-commerce storefront",
     "description": "A full storefront with cart, checkout, wishlist and order tracking, plus an admin panel for catalogue and content, on React and Firebase with a Node/Express payment backend.",
