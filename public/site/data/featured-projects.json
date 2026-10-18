@@ -50,8 +50,56 @@
     ]
   },
   {
+    "id": "f17-kori",
+    "title": "kori",
+    "subtitle": "Double-entry ledger and payments API",
+    "description": "Money moves as balanced transactions in an append-only journal, retries are idempotent, and a verification pass re-derives every balance. Try to break it in the live sandbox: send a payment twice, overspend, then verify the books.",
+    "image": "/images/projects/kori.jpg",
+    "liveUrl": "https://kori.130-210-37-18.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/kori",
+    "tags": [
+      "TypeScript",
+      "PostgreSQL",
+      "Redis",
+      "Idempotency"
+    ],
+    "order": 4
+  },
+  {
+    "id": "f18-quill",
+    "title": "quill",
+    "subtitle": "A SQL database, from scratch",
+    "description": "A relational database in Go: a B+tree on slotted pages, a write-ahead log with crash recovery, and the PostgreSQL wire protocol, so the real psql connects to a live read-only instance.",
+    "image": "/images/projects/quill.jpg",
+    "liveUrl": "https://quill.130-210-37-18.sslip.io",
+    "githubClient": "https://github.com/Nafiz001/quill",
+    "tags": [
+      "Go",
+      "B+tree",
+      "WAL",
+      "PostgreSQL protocol"
+    ],
+    "order": 5
+  },
+  {
+    "id": "f19-noctiluca",
+    "title": "noctiluca",
+    "subtitle": "A deep-sea dive lit by strangers",
+    "description": "Dive from the surface to the Challenger Deep past eleven real animals drawn as point clouds, and leave a light for others to find. Django and Channels on the back, Next.js and WebGL on the front, other divers live over WebSockets.",
+    "image": "/images/projects/noctiluca.jpg",
+    "liveUrl": "https://noctiluca-two.vercel.app",
+    "githubClient": "https://github.com/Nafiz001/noctiluca",
+    "tags": [
+      "Django",
+      "Channels",
+      "Next.js",
+      "WebGL"
+    ],
+    "order": 6
+  },
+  {
     "id": "f10-ryoiki-tenkai",
-    "order": 4,
+    "order": 7,
     "title": "Ryōiki Tenkai · 領域展開",
     "subtitle": "Interactive Domain Expansions",
     "description": "Jujutsu Kaisen's Domain Expansions as a 2.5D portal depth tunnel, a domain clash simulator and a code-split three.js realm, with manga impact frames and a soundtrack synthesized in the Web Audio API.",
@@ -67,7 +115,7 @@
   },
   {
     "id": "f11-ebru",
-    "order": 5,
+    "order": 8,
     "title": "ebru",
     "subtitle": "A shared marbling tray",
     "description": "Turkish paper marbling that anyone can work in at once: the same Rust marbling maths runs on the server and, compiled to WebAssembly, in the browser, bit for bit, with prints saved to a shared gallery.",
@@ -83,7 +131,7 @@
   },
   {
     "id": "f12-kirie",
-    "order": 6,
+    "order": 9,
     "title": "kirie",
     "subtitle": "A pop-up book of the sky",
     "description": "A paper pop-up book of the sky over 36 places, lit by the live weather there and the real sun and moon, with readers seeing each other's paper cranes in real time.",
@@ -99,7 +147,7 @@
   },
   {
     "id": "f13-asterism",
-    "order": 7,
+    "order": 10,
     "title": "Asterism",
     "subtitle": "AR stargazing app",
     "description": "Hold your phone to the sky and it names what you see: stars, planets and the ISS, drawn on the UI thread with Skia, plus a forecast of whether tonight is worth going out. The link is its web version.",
@@ -115,7 +163,7 @@
   },
   {
     "id": "f14-lumen",
-    "order": 8,
+    "order": 11,
     "title": "lumen",
     "subtitle": "A search engine from scratch",
     "description": "A crawler, inverted index, BM25 ranking and snippets written with nothing but Go's standard library, live here searching the 400 pages of the Go blog it crawled.",
@@ -131,7 +179,7 @@
   },
   {
     "id": "f15-gedis",
-    "order": 9,
+    "order": 12,
     "title": "gedis",
     "subtitle": "Redis, from scratch",
     "description": "A Redis-compatible in-memory store that speaks RESP, so the official redis-cli talks to it, with replication, AOF persistence and eviction. A public, fenced-off instance takes connections on port 6380.",
@@ -147,7 +195,7 @@
   },
   {
     "id": "f9-shopcircuit",
-    "order": 10,
+    "order": 13,
     "title": "ShopCircuit",
     "subtitle": "E-commerce storefront",
     "description": "A full storefront with cart, checkout, wishlist and order tracking, plus an admin panel for catalogue and content, on React and Firebase with a Node/Express payment backend.",
