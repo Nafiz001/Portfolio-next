@@ -1,4 +1,4 @@
-Visit: https://nafiz-ahmed-xi.vercel.app/
+Visit: https://www.nafizahmed.tech/
 
 # Nafiz Ahmed - Portfolio Website
 
