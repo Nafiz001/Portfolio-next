@@ -1,0 +1,137 @@
+/* Phone and small-tablet fixes, loaded after custom.css. */
+
+@media (max-width: 767.98px) {
+  /* The CV button is the one action a recruiter needs: keep it in the header. */
+  .header-three-button {
+    display: block !important;
+  }
+  .header-three-button a {
+    padding: 12px 16px !important;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .header-right {
+    gap: 10px !important;
+  }
+
+  /* The menu's own contact block (the desktop right-hand panel is hidden here). */
+  .mobile-menu-extras {
+    /* the same 40px side padding the menu links have */
+    margin: 28px 40px 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .mobile-menu-extras .mobile-cv {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #ff5b1a;
+    color: #fff;
+  }
+  .mobile-menu-extras ul {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 0;
+    display: grid;
+    gap: 12px;
+  }
+  .mobile-menu-extras ul a {
+    color: #fff;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mobile-menu-extras .mobile-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .mobile-menu-extras .mobile-social a {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* A long menu must scroll inside the panel rather than run off the screen. */
+  .tw-offcanvas-2-left {
+    overflow-y: auto;
+    max-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  /* "2+ Years" circle: it was as wide as the column, so its edge and shadow were cut off. */
+  .about-three-counter:not(.portfolio-three-counter) .tw-btn-circle {
+    width: min(240px, 66vw) !important;
+    height: min(240px, 66vw) !important;
+  }
+  .about-three-counter:not(.portfolio-three-counter) .tw-btn-circle-icon {
+    font-size: 64px !important;
+  }
+  .about-three-counter:not(.portfolio-three-counter) {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* The counter cards under the portrait: full width, not left-aligned halves. */
+  .about-three-wrap-shape {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .about-three-wrap-shape .banner-three-counter-item {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Projects: the button and the GitHub circle stack under the cards instead of
+     sharing a row that ran into the big "WORKS" heading. */
+  .portfolio-actions {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 28px;
+    height: auto !important;
+  }
+  .portfolio-three-counter .tw-btn-circle {
+    width: 170px !important;
+    height: 170px !important;
+  }
+  .portfolio-three-counter .tw-btn-circle .tw-text-2xl {
+    font-size: 18px !important;
+  }
+
+  /* Achievements: number and title on one line, the detail under them. */
+  .feature-three-item {
+    flex-wrap: wrap;
+    align-items: flex-start !important;
+    gap: 6px 14px;
+  }
+  .feature-three-left {
+    flex-wrap: wrap;
+    align-items: baseline !important;
+    gap: 4px 14px;
+    flex: 1 1 100%;
+  }
+  .feature-three-left > div:nth-child(2) .feature-three-text {
+    width: auto !important;
+  }
+  .feature-three-left > div:nth-child(3) {
+    flex-basis: 100%;
+  }
+  .feature-three-item .feature-three-text {
+    font-size: 20px !important;
+    line-height: 1.35;
+  }
+  .feature-three-left > div:nth-child(3) .feature-three-text {
+    font-size: 17px !important;
+    opacity: 0.75;
+  }
+}
